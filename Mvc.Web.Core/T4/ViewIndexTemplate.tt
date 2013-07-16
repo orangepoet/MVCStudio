@@ -1,0 +1,34 @@
+﻿<#@ import namespace="System" #>
+
+<#+
+public class ViewIndexTemplate : T4Toolbox.Template
+{
+	public string ModelName {get; set;}
+	public ViewIndexTemplate(string tableName)
+	{
+	    ModelName = tableName.Substring(0, tableName.Length-1);
+	}
+
+    public override string TransformText()
+    {
+#>
+@model PagedList<Lib.Mvc4App.Models.<#=ModelName#>>
+@{
+    ViewBag.Title = "<#=ModelName #>";
+}
+<h2>
+    <#=ModelName #></h2>
+<div class="toolbar">
+    @Html.ToolBar(Url, new ToolBarAction[] 
+    { 
+        ToolBarAction.Create, 
+    })
+</div>
+<div id="list">
+    @Html.Partial("_list", Model)
+</div>
+<#+
+        return this.GenerationEnvironment.ToString();
+    }
+}
+#>

@@ -1,0 +1,17 @@
+﻿@model IList<Mvc.Web.Models.MenuItem>
+<ul>
+    <div>
+        系统菜单
+    </div>
+    @foreach (var menu in Model) {
+        <li><a href="#">@menu.MenuName</a>
+            <ul>
+                @foreach (var child in menu.Children) {
+                    <li>
+                        @Html.ActionLink(child.MenuName, child.Action, child.Controller)
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+</ul>

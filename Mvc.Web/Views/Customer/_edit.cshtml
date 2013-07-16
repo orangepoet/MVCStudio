@@ -1,0 +1,87 @@
+﻿@model Mvc.Models.Entity.Customer
+@if (Model != null) {
+    using (Html.BeginForm()) {
+    @Html.HiddenFor(c => c.CustomerId)
+    @Html.ValidationSummary(true)
+    <table>
+        <tr>
+            <th>
+                公司名称
+            </th>
+            <td>
+                @Html.EditorFor(c => c.CustomerName)
+                @Html.ValidationMessageFor(c => c.CustomerName)
+            </td>
+            <th>
+                简称
+            </th>
+            <td>
+                @Html.EditorFor(c => c.ShortName)
+                @Html.ValidationMessageFor(c => c.ShortName)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                助记码
+            </th>
+            <td>
+                @Html.EditorFor(c => c.MnCode)
+                @Html.ValidationMessageFor(c => c.MnCode)
+            </td>
+            <th>
+                公司地址
+            </th>
+            <td>
+                @Html.EditorFor(c => c.Address)
+                @Html.ValidationMessageFor(c => c.Address)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                联系电话
+            </th>
+            <td>
+                @Html.EditorFor(c => c.Phones)
+                @Html.ValidationMessageFor(c => c.Phones)
+            </td>
+            <th>
+                邮政编码
+            </th>
+            <td>
+                @Html.EditorFor(c => c.PostCode)
+                @Html.ValidationMessageFor(c => c.PostCode)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                联系人
+            </th>
+            <td>
+                @Html.EditorFor(c => c.Contract)
+                @Html.ValidationMessageFor(c => c.Contract)
+            </td>
+            <th>
+                客户状态
+            </th>
+            <td>
+                @Html.DropDownListFor(c => c.Status, Content.GetStatus(Model.Status))
+                @Html.ValidationMessageFor(c => c.Status)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                备注
+            </th>
+            <td colspan="3">
+                @*@Html.TextAreaFor(c => c.Remarks, new { @class = "textarea" })*@
+                @Html.EditorFor(c => c.Remarks)
+                @Html.ValidationMessageFor(c => c.Remarks)
+            </td>
+        </tr>
+    </table>
+    <p class="center">
+        <input type="submit" value="提交" />
+        <input type="button" value="返回" onclick="window.location='@Url.Action("Index", "Customer")'" />
+    </p>
+    }
+}

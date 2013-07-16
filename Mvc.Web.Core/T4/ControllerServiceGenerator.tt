@@ -1,0 +1,17 @@
+﻿<#@ include file="ServiceTemplate.tt" #>
+<#@ include file="ControllerTemplate.tt" #>
+<#@ include file="T4Toolbox.tt" #>
+
+<#+
+public class ControllerServiceGenerator : T4Toolbox.Generator
+{
+	public string ModelName { get; set; }
+	public ControllerServiceGenerator(string modelName) { 
+		ModelName = modelName;
+	}
+	protected override void RunCore() {
+		new ServiceTemplate(ModelName).RenderToFile("I"+ModelName+"Service.cs");
+		new ControllerTemplate(ModelName).RenderToFile(ModelName+"Controller.cs");
+	}
+}
+#>

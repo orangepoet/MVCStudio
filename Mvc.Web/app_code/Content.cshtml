@@ -1,0 +1,64 @@
+﻿@using System.Web.Mvc
+@functions{
+
+    public static string ConvertState(string status)
+    {
+        string value = "";
+        switch (status)
+        {
+            case "A":
+                value = "有效";
+                break;
+            case "U":
+                value = "无效";
+                break;
+            case "D":
+                value = "已删除";
+                break;
+        }
+        return value;
+    }
+
+
+    public static string ConvertSex(string status) {
+        return status == "1" ? "男" : "女";
+    }
+
+    public static string SubStr(int length, string str)
+    {
+        if (str.Length > length)
+        {
+            str = str.Substring(0, length) + "..";
+        }
+        return str;
+    }
+
+
+    public static SelectList GetStatus(string selectedValue)
+    {
+        IDictionary<string, string> statusList = new Dictionary<string, string>();
+        statusList.Add("有效", "A");
+        statusList.Add("无效", "U");
+        statusList.Add("已删除", "D");
+        SelectList selectList = new SelectList(statusList, "value", "key", selectedValue);
+        return selectList;
+    }
+
+    public static SelectList GeSex(string selectedValue) {
+        IDictionary<string, string> statusList = new Dictionary<string, string>();
+        statusList.Add("1", "男");
+        statusList.Add("2", "女");
+        SelectList selectList = new SelectList(statusList, "key", "value", selectedValue);
+        return selectList;
+    }
+
+    public static SelectList GetItemType(string selectedValue)
+    {
+        IDictionary<string, string> statusList = new Dictionary<string, string>();
+        //statusList.Add("--请选择--", "--请选择--");
+        statusList.Add("水费", "水费");
+        statusList.Add("电费", "电费");
+        SelectList selectList = new SelectList(statusList, "value", "key", selectedValue);
+        return selectList;
+    }
+}

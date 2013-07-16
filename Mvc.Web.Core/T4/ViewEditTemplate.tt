@@ -1,0 +1,30 @@
+﻿<#+
+public class ViewEditTemplate : Template
+{
+	public string ModelName { get; set; }
+	public ViewEditTemplate(string tableName){
+		ModelName = tableName.Substring(0,tableName.Length-1);
+	}
+	public override string TransformText()
+	{
+#>
+@model Lib.Mvc4App.Models.<#=ModelName #>
+@{
+    ViewBag.Title = "<#=ModelName #>";
+}
+@section script
+{
+    @Content.Script("jquery/jquery.validate.min.js", Url)
+    @Content.Script("jquery/jquery.validate.unobtrusive.min.js", Url)
+}
+<h2>
+    <#=ModelName #>
+</h2>
+<div class="doc">
+    @Html.Partial("_edit")
+</div>
+<#+
+        return this.GenerationEnvironment.ToString();
+	}
+}
+#>

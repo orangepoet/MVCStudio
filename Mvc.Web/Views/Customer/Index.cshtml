@@ -1,0 +1,18 @@
+﻿@model Mvc.Web.Core.Utils.PagedList<Mvc.Models.Entity.Customer>
+@{
+    ViewBag.Title = "客户管理";
+}
+<h2>
+    客户维护</h2>
+<div class="toolbar">
+    @Html.ToolBar(Url, new ToolBarAction[] 
+    { 
+        ToolBarAction.Create, 
+        ToolBarAction.Import 
+    })
+</div>
+@ViewBag.LastUpdateTime
+<div id="list">
+    @{Html.RenderAction("Grid");}
+</div>
+@Html.ActionLink("Update","Modify")

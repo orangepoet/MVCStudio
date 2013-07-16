@@ -1,0 +1,60 @@
+﻿<#+
+public class View_editTemplate : Template
+{
+	public string DbName { get; set;}
+	public string TableName {get; set;}
+	public string ModelName { get; set; }
+	
+	public View_editTemplate(string dbName,string tableName){
+		DbName = dbName;
+		TableName = tableName;
+		ModelName = tableName.Substring(0,tableName.Length-1);
+	}
+	public override string TransformText()
+	{
+		Server server = new Server();
+        Database db = new Database(server, DbName);
+		Table table = new Table(db, TableName);
+		table.Refresh();
+		List<string> properties = new List<string>();
+		for (int i = 0; i < table.Columns.Count; i++) {
+            string colName = table.Columns[i].Name;
+			if(colName=="LastModifyUser" || colName=="LastModifyTime")
+				continue;
+			properties.Add(colName);
+        }
+#>
+@model Lib.Mvc4App.Models.<#=ModelName #>
+@if (Model != null) {
+    using (Html.BeginForm()) {
+    @Html.HiddenFor(c => c.Id)
+    @Html.ValidationSummary(true)
+    <table>
+<#+
+		for (int i = 0,j=0; i < properties.Count; i++,j++) {
+#>
+<#+if(j%2==0){#>
+		<tr>
+<#+}#>
+			<th><#=properties[i]#></th>
+			<td>
+				@Html.EditorFor(c => c.<#=properties[i] #>)
+				@Html.ValidationMessageFor(c => c.<#=properties[i] #>)
+			</td>
+<#+if(j%2==1){#>
+		</tr>
+<#+}#>
+<#+}#>
+		</tr>
+    </table>
+    <p class="center">
+        <input type="submit" value="提交" />
+        <input type="button" value="返回" onclick="window.location='@Url.Action("Index")'" />
+    </p>
+    }
+}
+<#+
+        return this.GenerationEnvironment.ToString();
+	}
+}
+#>

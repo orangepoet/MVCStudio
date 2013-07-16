@@ -1,0 +1,8 @@
+﻿<#@ template language="C#" hostSpecific="true" debug="true" #>
+<#@ output extension=".txt" #>
+<#@ include file="ViewGenerator.tt" #>
+<#
+   string dbName = "Orange";
+   string tableName = "Contracts";
+   new ViewGenerator(dbName, tableName).Run();
+#>

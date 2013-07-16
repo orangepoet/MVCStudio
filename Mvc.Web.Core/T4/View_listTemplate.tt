@@ -1,0 +1,77 @@
+﻿<#@ assembly name="Microsoft.SqlServer.ConnectionInfo" #>
+<#@ assembly name="Microsoft.SqlServer.Smo" #>
+<#@ assembly name="Microsoft.SqlServer.Management.Sdk.Sfc" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="Microsoft.SqlServer.Management.Smo" #>
+
+<#+
+public class View_listTemplate : Template
+{
+	public string DbName { get; set; }
+	public string TableName { get; set; }
+	public string ModelName { get; set; }
+
+	public View_listTemplate(string dbName,string tableName) {
+		DbName = dbName;
+		TableName = tableName;
+		ModelName = tableName.Substring(0,tableName.Length-1);
+	}
+	public override string TransformText()
+	{
+		Server server = new Server();
+        Database db = new Database(server, DbName);
+        Table table = new Table(db, TableName);
+        table.Refresh();
+		string[] columns = new string[table.Columns.Count];
+		List<string> properties = new List<string>();
+		for (int i = 0; i < table.Columns.Count; i++) {
+            string colName = table.Columns[i].Name;
+			if(colName=="LastModifyUser" || colName=="LastModifyTime")
+				continue;
+			properties.Add(colName);
+        }
+#>
+@model PagedList<Lib.Mvc4App.Models.<#=ModelName#>>
+@{
+	int seq = (Model.PageIndex -1)* Model.PageSize;
+}
+@if(Model != null && Model.PageCount > 0) {
+	<table class="list">
+		<tr>
+			<th>seq</th>
+<#+foreach(var property in properties){#>
+			<th><#=property #></th>
+<#+}#>
+			<th>operation</th>
+		</tr>
+		@foreach (var item in Model) {
+		<tr>
+			<td>@Html.ActionLink((++seq).ToString(), "Details", new {id=item.Id })</td>
+<#+foreach(var property in properties){#>
+			<td>@item.<#=property #></td>
+<#+}#>
+			<td>
+				@Html.ImageLink(Url.Action("Edit", new { id = item.Id }), Url.Content("~/Content/images/icon-edit.gif"))
+                @if (item.Status != "D") { 
+                    @Ajax.ImageLink(null, new AjaxOptions {
+                        Confirm = "确认删除吗?",
+                        HttpMethod = "Post",
+						OnFailure="ActionErr",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "list",
+                    }, Url.Action("Delete", new { id = item.Id, pageIndex = Model.PageIndex }), Url.Content("~/Content/images/icon_del.gif"))
+                }
+			</td>
+		</tr>
+		}
+	</table>
+	<nav class="center">
+		@Html.PageLinks(Model.PageCount, Model.PageIndex, i => Url.Action("Index", new { pageIndex = i }))
+	</nav>
+}
+<#+
+        return this.GenerationEnvironment.ToString();
+	}
+}
+#>

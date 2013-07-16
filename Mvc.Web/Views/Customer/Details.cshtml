@@ -1,0 +1,10 @@
+﻿@model Mvc.Models.Entity.Customer
+@{
+    ViewBag.Title = "客户管理";
+}
+<h2>
+    客户信息[编号:@Model.CustomerId]
+</h2>
+<div class="doc">
+    @Html.Partial("_details")
+</div>

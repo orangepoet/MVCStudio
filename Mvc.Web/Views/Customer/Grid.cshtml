@@ -1,0 +1,82 @@
+﻿@model Mvc.Web.Core.Utils.PagedList<Mvc.Models.Entity.Customer>
+@{
+    int seq = (Model.PageIndex - 1) * Model.PageSize;
+}
+@if (Model != null && Model.PageCount > 0) {
+    <table class="list">
+        <tr>
+            <th style="width: 80px;">
+                序号
+            </th>
+            <th style="width: 250px;">
+                公司名称
+            </th>
+            <th style="width: 120px">
+                简称
+            </th>
+            <th style="width: 120px">
+                助记码
+            </th>
+            <th>
+                联系电话
+            </th>
+            <th>
+                联系人
+            </th>
+            <th>
+                操作
+            </th>
+        </tr>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @((++seq).ToString())
+                </td>
+                <td>
+                    @Html.ActionLink(item.CustomerName, "Details", new { id = @item.CustomerId })
+                </td>
+                <td>
+                    @item.ShortName
+                </td>
+                <td>
+                    @item.MnCode
+                </td>
+                <td>
+                    @item.Phones
+                </td>
+                <td>
+                    @item.Contract
+                </td>
+                <td>
+                    @Html.ImageLink(
+                        "编辑",
+                        Url.Action("Edit", new { id = item.CustomerId }),
+                        Url.Content("~/Content/images/icon-edit.gif"))
+                    @if (item.Status != "D") { 
+                        @Ajax.ImageLink(
+                       "删除",
+                       Url.Action("Delete", new { id = item.CustomerId, pageIndex = Model.PageIndex }),
+                       Url.Content("~/Content/images/icon_del.gif"),
+                       new AjaxOptions {
+                           Confirm = "确认删除吗?",
+                           HttpMethod = "Post",
+                           OnFailure = "ActionErr",
+                           InsertionMode = InsertionMode.Replace,
+                           UpdateTargetId = "list",
+                       })
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+    <nav class="center">
+        <span>Total: @Model.TotalCount.ToString()</span>
+        @Ajax.PageLinks(Model.PageCount, Model.PageIndex, i => Url.Action("Grid", new { pageIndex = i }),
+            new AjaxOptions { UpdateTargetId = "list", HttpMethod = "Post" })
+    </nav>
+}
+@*else
+{
+    @:温馨提示: 没有数据哦
+}
+*@

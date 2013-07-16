@@ -1,0 +1,32 @@
+﻿<#@ assembly name="Microsoft.SqlServer.ConnectionInfo" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="ViewIndexTemplate.tt" #>
+<#@ include file="View_listTemplate.tt" #>
+<#@ include file="ViewCreateTemplate.tt" #>
+<#@ include file="ViewDetailsTemplate.tt" #>
+<#@ include file="ViewEditTemplate.tt" #>
+<#@ include file="View_editTemplate.tt" #>
+<#@ include file="View_detailsTemplate.tt" #>
+<#@ include file="T4Toolbox.tt" #>
+<#+
+public class ViewGenerator : T4Toolbox.Generator
+{
+	private string dbName;
+	private string tableName;
+  
+  	public ViewGenerator(string dbName,string tableName) {
+		this.dbName = dbName;
+		this.tableName = tableName;
+	}
+	
+	protected override void RunCore() {
+	    new ViewIndexTemplate(tableName).RenderToFile("Index.cshtml");
+		new View_listTemplate(dbName, tableName).RenderToFile("_list.cshtml");
+		new ViewCreateTemplate(tableName).RenderToFile("Create.cshtml");
+		new ViewDetailsTemplate(tableName).RenderToFile("Details.cshtml");
+		new ViewEditTemplate(tableName).RenderToFile("Edit.cshtml");
+		new View_editTemplate(dbName,tableName).RenderToFile("_edit.cshtml");
+		new View_detailsTemplate(dbName,tableName).RenderToFile("_details.cshtml");
+    }
+}
+#>

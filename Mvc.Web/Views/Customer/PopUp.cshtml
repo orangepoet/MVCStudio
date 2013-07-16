@@ -1,0 +1,46 @@
+﻿@model Mvc.Web.Core.Utils.PagedList<Mvc.Models.Entity.Customer>
+@{
+    Layout = null;
+}
+<div id="list">
+    @if (Model != null && Model.PageCount > 0) {
+        <table class="list">
+            <tr>
+                <th style="width: 40px;">选择</th>
+                <th>公司名称</th>
+                <th>联系人</th>
+                <th>公司地址</th>
+                <th>联系电话</th>
+                <th>开户银行</th>
+                <th>邮政编码</th>
+                <th>银行帐号</th>
+            </tr>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        <input type="checkbox" id="@item.CustomerId" name="chkSelect" value="chkSelect" onclick="$selectone(this)" />
+                    </td>
+                    <td>@item.CustomerName</td>
+                    <td>@item.Contract</td>
+                    <td>@item.Address</td>
+                    <td>@item.Phones</td>
+                    <td>@item.Banks</td>
+                    <td>@item.PostCode</td>
+                    <td>@item.Account</td>
+                </tr>
+            }
+        </table>
+        <nav class="center">
+            @Ajax.PageLinks(Model.PageCount, Model.PageIndex, i => Url.Action("PopUp", new { pageIndex = i }), new AjaxOptions { 
+             HttpMethod="Post",
+             UpdateTargetId="list",
+             InsertionMode=InsertionMode.Replace
+        })
+        </nav>
+    }
+@*else
+{
+    @:温馨提示: 没有数据哦
+}
+*@
+</div>

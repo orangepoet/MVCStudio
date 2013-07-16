@@ -1,0 +1,74 @@
+﻿@model Mvc.Models.Entity.Customer
+@if (Model != null) {
+    <table>
+        <tr>
+            <th>
+                公司名称
+            </th>
+            <td>
+                @Html.DisplayFor(c => c.CustomerName)
+            </td>
+            <th>
+                简称
+            </th>
+            <td>
+                @Html.DisplayFor(c => c.ShortName)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                助记码
+            </th>
+            <td>
+                @Html.DisplayFor(c => c.MnCode)
+            </td>
+            <th>
+                公司地址
+            </th>
+            <td>
+                @Html.DisplayFor(c => c.Address)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                联系电话
+            </th>
+            <td>
+                @Html.DisplayFor(c => c.Phones)
+            </td>
+            <th>
+                邮政编码
+            </th>
+            <td>
+                @Html.DisplayFor(c => c.PostCode)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                联系人
+            </th>
+            <td>
+                @Html.DisplayFor(c => c.Contract)
+            </td>
+            <th>
+                客户状态
+            </th>
+            <td>
+                @Content.ConvertState(Model.Status)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                备注
+            </th>
+            <td colspan="3">
+                @*@Html.TextAreaFor(c => c.Remarks, new { @class = "textarea", @readonly = "readonly" })*@
+                @Html.DisplayFor(c => c.Remarks)
+            </td>
+        </tr>
+    </table>
+    <p class="center">
+        <input type="button" value="编辑" onclick="window.location='@Url.Action("Edit", "Customer", new { id = Model.CustomerId })'" />
+        <input type="button" value="返回" onclick="window.location='@Url.Action("Index", "Customer")'" />
+    </p>
+}

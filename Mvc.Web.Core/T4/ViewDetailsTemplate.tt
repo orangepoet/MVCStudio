@@ -1,0 +1,25 @@
+﻿<#+
+public class ViewDetailsTemplate : Template
+{
+	public string ModelName { get; set; }
+	public ViewDetailsTemplate(string tableName){
+		ModelName = tableName.Substring(0,tableName.Length-1);
+	}
+	public override string TransformText()
+	{
+#>
+@model Lib.Mvc4App.Models.<#=ModelName #>
+@{
+    ViewBag.Title = "<#=ModelName #>";
+}
+<h2>
+    <#=ModelName #>
+</h2>
+<div class="doc">
+    @Html.Partial("_details")
+</div>
+<#+
+        return this.GenerationEnvironment.ToString();
+	}
+}
+#>

@@ -1,0 +1,68 @@
+﻿<#+
+
+public class ServiceTemplate : Template
+{
+	public string ModelName { get; set; }
+	public ServiceTemplate(string modelName) {
+		ModelName = modelName;		
+	}
+	public override string TransformText()
+	{
+#>
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using Lib.Mvc4App.Models;
+
+namespace Lib.Mvc4App.Services {
+
+    public interface I<#=ModelName#>Service : IBaseService<<#=ModelName#>> {
+        <#=ModelName#> GetNext();
+    }
+
+    public class <#=ModelName#>Service : BaseService, I<#=ModelName#>Service {
+        public IList<<#=ModelName#>> GetList(Func<<#=ModelName#>, bool> filters) {
+            if (filters != null)
+                return db.<#=ModelName#>s.Where(filters).ToList();
+            else
+                return db.<#=ModelName#>s.ToList();
+        }
+
+		public <#=ModelName#> Find(params object[] keys) {
+            return db.<#=ModelName#>s.Find(keys);
+        }
+
+        public void Add(<#=ModelName#> model) {
+            db.<#=ModelName#>s.Add(model);
+        }
+
+        public void Update(<#=ModelName#> model) {
+            db.Entry(model).State = EntityState.Modified;
+        }
+
+        public void Delete(<#=ModelName#> model) {
+            db.<#=ModelName#>s.Remove(model);
+        }
+
+		public void Save() {
+			db.SaveChanges();
+		}
+
+        public void Dispose() {
+            db.Dispose();
+        }
+        
+        public <#=ModelName#> GetNext() {
+            int id = 1;
+            if (db.<#=ModelName#>s.Count() > 0)
+                id = db.<#=ModelName#>s.Max(c => c.Id) + 1;
+            return new <#=ModelName#> { Id = id };
+        }       
+    }
+}
+<#+
+        return this.GenerationEnvironment.ToString();
+	}
+}
+#>
