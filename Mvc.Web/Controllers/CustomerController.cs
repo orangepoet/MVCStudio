@@ -75,6 +75,7 @@ namespace Mvc.Web.Controllers {
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Customer c) {
             if (ModelState.IsValid) {
                 try {

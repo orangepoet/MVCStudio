@@ -19,7 +19,8 @@
 </head>
 <body>
     <div id="nav">
-        @Html.Partial("_navdemo")
+        @*@Html.Partial("_navdemo")*@
+        @{Html.RenderAction("Menu", "Home");}
     </div>
     @RenderBody()
     @Scripts.Render("~/bundles/jquery")

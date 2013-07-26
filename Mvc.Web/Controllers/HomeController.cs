@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Xml.Linq;
 using Mvc.Web.Models;
+using System.Net;
 
 namespace Mvc.Web.Controllers {
-    public class HomeController : Controller {
+    public class HomeController : AsyncController {
         //
         // GET: /Home/
 
@@ -15,10 +18,28 @@ namespace Mvc.Web.Controllers {
             return View();
         }
 
+        private void GetMenuFromXML(DoWorkEventArgs e) {
+            e.Result = GetMenuFromXML();
+        }
+
         public ActionResult Menu() {
             var model = GetMenuFromXML();
             return PartialView("_menu", model);
         }
+
+        #region Async Actions
+        public void DataAsync() {
+            AsyncManager.OutstandingOperations.Increment();
+            Task.Factory.StartNew(() => {
+                AsyncManager.Parameters["Data"] = "DataAsync";
+                AsyncManager.OutstandingOperations.Decrement();
+            });
+        }
+
+        public ActionResult DataCompleted(string Data) {
+            return Content(Data);
+        } 
+        #endregion
 
         private IList<MenuItem> GetMenuFromXML() {
             //var list = service.GetList(null);
