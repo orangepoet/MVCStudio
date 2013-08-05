@@ -3,6 +3,10 @@ using System.Web.Mvc;
 using Ninject;
 
 namespace Mvc.Web.Core.IoC {
+    /// <summary>
+    /// 使用时, 需要在Global文件的Application_Start()中设置:
+    /// ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
+    /// </summary>
     public class NinjectContollerFactory : DefaultControllerFactory {
         private IKernel kernel;
         public NinjectContollerFactory() {

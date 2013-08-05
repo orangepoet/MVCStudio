@@ -5,6 +5,10 @@ using Ninject;
 using Ninject.Syntax;
 
 namespace Mvc.Web.Core.IoC {
+    /// <summary>
+    /// 使用时, 需要在Global文件的Application_Start()中设置
+    ///  DependencyResolver.SetResolver(new NinjectResolver());
+    /// </summary>
     public class NinjectDependencyResolver : IDependencyResolver {
         private IKernel kernel;
 

@@ -33,7 +33,7 @@ namespace Mvc.Web.Controllers {
 
         public PartialViewResult Grid(int pageIndex = 1) {
             OutputCacheManager manager = new OutputCacheManager();
-            
+
             Debug.WriteLine(HttpRuntime.Cache.Count);
             System.Threading.Thread.Sleep(2000);
             Debug.WriteLine(HttpRuntime.Cache.Count);
@@ -131,6 +131,11 @@ namespace Mvc.Web.Controllers {
                 service.SaveChanges();
             }
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Export() {
+            ExcelHelper.Write(new System.Data.DataTable(), ExcelTemplate.TEMPLATE1);
+            return View();
         }
 
         //protected override void Dispose(bool disposing) {

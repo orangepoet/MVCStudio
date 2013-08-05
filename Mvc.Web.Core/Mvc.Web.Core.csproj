@@ -102,6 +102,7 @@
     <Compile Include="Filters\LogFilter.cs" />
     <Compile Include="Log\LogHelper.cs" />
     <Compile Include="Utils\CookieDomainModule.cs" />
+    <Compile Include="Utils\ExcelTemplate.cs" />
     <Compile Include="Utils\ImageHandler.cs" />
     <Compile Include="Validation\Foo.cs" />
     <Compile Include="Validation\FooPropertyValidator.cs" />
