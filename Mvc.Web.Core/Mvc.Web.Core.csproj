@@ -144,25 +144,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="T4\ControllerService.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ControllerService.txt</LastGenOutput>
-    </None>
-    <None Include="T4\ControllerServiceGenerator.tt" />
-    <None Include="T4\ControllerTemplate.tt" />
-    <None Include="T4\ServiceTemplate.tt" />
-    <None Include="T4\View.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>View.txt</LastGenOutput>
-    </None>
-    <None Include="T4\ViewCreateTemplate.tt" />
-    <None Include="T4\ViewDetailsTemplate.tt" />
-    <None Include="T4\ViewEditTemplate.tt" />
-    <None Include="T4\ViewGenerator.tt" />
-    <None Include="T4\ViewIndexTemplate.tt" />
-    <None Include="T4\View_detailsTemplate.tt" />
-    <None Include="T4\View_editTemplate.tt" />
-    <None Include="T4\View_listTemplate.tt" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

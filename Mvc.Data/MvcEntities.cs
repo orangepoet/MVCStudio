@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Mvc.Models.Entity;
+using Mvc.Models.Entities;
 using System.Data.Entity;
 
 namespace Mvc.Data {

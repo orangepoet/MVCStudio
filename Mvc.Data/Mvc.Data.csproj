@@ -35,8 +35,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.0.0-beta1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -49,18 +49,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mapping\CustomerGroupMap.cs" />
-    <Compile Include="Mapping\CustomerMap.cs" />
-    <Compile Include="Mapping\GroupMap.cs" />
+    <Compile Include="Mapping\Customer_Mapping.cs">
+      <DependentUpon>Mvc.Mapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\Group_Mapping.cs">
+      <DependentUpon>Mvc.Mapping.tt</DependentUpon>
+    </Compile>
     <Compile Include="Mapping\MenuMap.cs" />
+    <Compile Include="Mapping\Mvc.Mapping.cs">
+      <DependentUpon>Mvc.Mapping.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Mvc.Context.gen.cs">
+      <DependentUpon>Mvc.Context.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="MvcEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryImpls\BaseRepository.cs" />
-    <Compile Include="RepositoryImpls\CustomerRepository.cs" />
+    <Compile Include="Repository\ICustomerRepository.cs" />
+    <Compile Include="Repository\IFunctionRoleRepository.cs" />
+    <Compile Include="Repository\Impl\CustomerRepository.cs" />
+    <Compile Include="Repository\Impl\Repository.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="UnitOfWork\Impl\EFRepositoryContext.cs" />
+    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\IUnitOfWorkContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Mapping\Mvc.Mapping.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Mvc.Mapping.cs</LastGenOutput>
+    </None>
+    <None Include="Mvc.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Mvc.Context.gen.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -69,6 +96,9 @@
       <Project>{2B858984-6E3A-4964-8E80-69F12CCDEA3C}</Project>
       <Name>Mvc.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

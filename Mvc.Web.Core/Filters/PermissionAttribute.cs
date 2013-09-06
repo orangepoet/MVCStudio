@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using Mvc.Models.Repositories;
+using Mvc.Data.Repository;
 using Mvc.Models;
 using Mvc.Web.Core.Filters;
 using Mvc.Web.Core.Utils;

@@ -4,10 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mvc.Web.Models;
-using Mvc.Models.Repositories;
+using Mvc.Data.Repository;
+using Ninject;
 
 namespace Mvc.Web.Models
 {
+
+    public interface IViewRepository {
+
+    }
+
     //the types of dropdownlist
     public enum DropDownListType
     {
@@ -32,7 +38,8 @@ namespace Mvc.Web.Models
     /// </summary>
     public class DropDownList : List<SelectListItem>
     {
-        private IViewRepository vRep = (IViewRepository)DependencyResolver.Current.GetService(typeof(IViewRepository));
+        [Inject]
+        public IViewRepository vRep { get; set; }
 
         ///// <summary>
         ///// Initialize the operation system list items.

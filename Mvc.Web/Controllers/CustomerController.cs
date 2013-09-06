@@ -5,8 +5,8 @@ using System.Web;
 using System.Web.Caching;
 using System.Web.Mvc;
 using DevTrends.MvcDonutCaching;
-using Mvc.Models.Entity;
-using Mvc.Models.Repositories;
+using Mvc.Models.Entities;
+using Mvc.Data.Repository;
 using Mvc.Web.Core.Exts;
 using Mvc.Web.Core.Filters;
 using Mvc.Web.Core.Utils;
@@ -20,7 +20,7 @@ namespace Mvc.Web.Controllers {
         private const int pageSize = 10;
 
         [Inject]
-        public ICustomerRepository service { get; set; }
+        public ICustomerRepository rep { get; set; }
 
         //[AutoRefresh(DurationInSeconds = 10)]
         //[OutputCache(CacheProfile = "customercache")]
@@ -32,42 +32,43 @@ namespace Mvc.Web.Controllers {
         }
 
         public PartialViewResult Grid(int pageIndex = 1) {
-            OutputCacheManager manager = new OutputCacheManager();
+            //OutputCacheManager manager = new OutputCacheManager();
 
-            Debug.WriteLine(HttpRuntime.Cache.Count);
-            System.Threading.Thread.Sleep(2000);
-            Debug.WriteLine(HttpRuntime.Cache.Count);
-            PagedList<Customer> model = null;
-            string key = "customers/" + pageIndex.ToString();
-            if (HttpRuntime.Cache[key] != null) {
-                System.Diagnostics.Debug.WriteLine("Cached:" + pageIndex.ToString());
-                model = HttpRuntime.Cache[key] as PagedList<Customer>;
-            } else {
-                model = service.All
-                       .Where(c => c.Status != "D")
-                       .OrderByDescending(c => c.CustomerId)
-                       .ToPagedList(pageIndex, pageSize);
-                SqlCacheDependency dependency = new SqlCacheDependency("Mvc", "Customers");
-                System.Diagnostics.Debug.WriteLine("New:" + pageIndex.ToString());
-                HttpRuntime.Cache.Insert(key, model, dependency);
-            }
-            //var model = service.All
+            //Debug.WriteLine(HttpRuntime.Cache.Count);
+            //System.Threading.Thread.Sleep(2000);
+            //Debug.WriteLine(HttpRuntime.Cache.Count);
+            //PagedList<Customer> model = null;
+            //string key = "customers/" + pageIndex.ToString();
+            //if (HttpRuntime.Cache[key] != null) {
+            //    System.Diagnostics.Debug.WriteLine("Cached:" + pageIndex.ToString());
+            //    model = HttpRuntime.Cache[key] as PagedList<Customer>;
+            //} else {
+            //    model = rep.GetAll()
             //           .Where(c => c.Status != "D")
             //           .OrderByDescending(c => c.CustomerId)
             //           .ToPagedList(pageIndex, pageSize);
-            //System.Diagnostics.Debug.WriteLine("Grid:" + pageIndex.ToString());
+            //    SqlCacheDependency dependency = new SqlCacheDependency("Mvc", "Customers");
+            //    System.Diagnostics.Debug.WriteLine("New:" + pageIndex.ToString());
+            //    HttpRuntime.Cache.Insert(key, model, dependency);
+            //}
+
+            var model = rep.All
+                       .Where(c => c.Status != "D")
+                       .OrderByDescending(c => c.CustomerId)
+                       .ToPagedList(pageIndex, pageSize);
+            System.Diagnostics.Debug.WriteLine("Grid:" + pageIndex.ToString());
             return PartialView(model);
         }
 
         public PartialViewResult PopUp(int pageIndex = 1) {
             return PartialView(new PagedList<Customer>(
-                                           service.All.Where(c => c.Status != "D"),
+                                           rep.All.Where(c => c.Status != "D"),
                                            pageIndex,
                                            10));
         }
 
         public ViewResult Details(int id) {
-            return View(service.Find(id));
+            return View(rep.Get(id));
         }
 
         public ActionResult Create() {
@@ -81,8 +82,8 @@ namespace Mvc.Web.Controllers {
                 try {
                     c.Modifytime = DateTime.Now;
                     c.Modifyuser = User.Identity.Name;
-                    service.Add(c);
-                    service.SaveChanges();
+                    rep.Add(c);
+                    rep.UnitOfWork.Commit();
                     RedirectToAction("Index");
                 } catch (Exception ex) {
                     ModelState.AddModelError("CreateError", ex.Message);
@@ -92,17 +93,17 @@ namespace Mvc.Web.Controllers {
         }
 
         public ActionResult Edit(int id) {
-            return View(service.Find(id));
+            return View(rep.Get(id));
         }
 
         [HttpPost]
         public ActionResult Edit(int CustomerId, FormCollection forms) {
-            var model = service.Find(CustomerId);
+            var model = rep.Get(CustomerId);
             if (TryUpdateModel(model)) {
                 model.Modifyuser = User.Identity.Name;
                 model.Modifytime = DateTime.Now;
-                service.Update(model);
-                service.SaveChanges();
+                rep.Update(model);
+                rep.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
 
@@ -112,11 +113,11 @@ namespace Mvc.Web.Controllers {
         [HttpPost]
         public ActionResult Delete(int id, int pageIndex) {
             try {
-                var model = service.Find(id);
+                var model = rep.Get(id);
                 model.Status = "D";
-                service.Update(model);
-                service.SaveChanges();
-            } catch (Exception ex) {
+                rep.Update(model);
+                rep.UnitOfWork.Commit();
+            } catch (Exception) {
                 throw;
             }
 
@@ -124,11 +125,11 @@ namespace Mvc.Web.Controllers {
         }
 
         public ActionResult Modify() {
-            var m = service.All.FirstOrDefault(c => c.Status != "D");
+            var m = rep.All.FirstOrDefault(c => c.Status != "D");
             if (m != null) {
                 m.Status = "D";
-                service.Update(m);
-                service.SaveChanges();
+                rep.Update(m);
+                rep.UnitOfWork.Commit();
             }
             return RedirectToAction("Index");
         }

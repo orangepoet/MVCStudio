@@ -272,6 +272,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mvc.Data\Mvc.Data.csproj">
+      <Project>{9DE4D10A-AE59-43B4-BF2F-DB9CC84C09EB}</Project>
+      <Name>Mvc.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mvc.Models\Mvc.Models.csproj">
       <Project>{2B858984-6E3A-4964-8E80-69F12CCDEA3C}</Project>
       <Name>Mvc.Models</Name>

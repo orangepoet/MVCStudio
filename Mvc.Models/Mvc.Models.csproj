@@ -41,15 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\Customer.cs" />
-    <Compile Include="Entity\CustomerGroup.cs" />
-    <Compile Include="Entity\Group.cs" />
-    <Compile Include="Entity\Menu.cs" />
+    <Compile Include="Entities\Customer.gen.cs">
+      <DependentUpon>Mvc.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\Group.gen.cs">
+      <DependentUpon>Mvc.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Menu.cs" />
+    <Compile Include="Entities\Mvc.Entities.cs">
+      <DependentUpon>Mvc.Entities.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\ICustomerRepository.cs" />
-    <Compile Include="Repositories\IFunctionRoleRepository.cs" />
-    <Compile Include="Repositories\IBaseRepository.cs" />
-    <Compile Include="Repositories\IViewRepository.cs" />
     <Compile Include="Specification\AndSpecification.cs" />
     <Compile Include="Specification\CompositeSpecification.cs" />
     <Compile Include="Specification\DirectSpecification.cs" />
@@ -63,7 +68,15 @@
     <Compile Include="Specification\TrueSpecification.cs" />
     <Compile Include="UserInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Entities\Mvc.Entities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Mvc.Entities.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

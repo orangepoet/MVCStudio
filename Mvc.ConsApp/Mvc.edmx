@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LogisticsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="LogisticsModelStoreContainer">
+          <EntitySet Name="CustomerGroup" EntityType="LogisticsModel.Store.CustomerGroup" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Customers" EntityType="LogisticsModel.Store.Customers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Groups" EntityType="LogisticsModel.Store.Groups" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CustomerGroup_Customers_CustomerId" Association="LogisticsModel.Store.FK_CustomerGroup_Customers_CustomerId">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="CustomerGroup" EntitySet="CustomerGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerGroup_Groups_Groupid" Association="LogisticsModel.Store.FK_CustomerGroup_Groups_Groupid">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="CustomerGroup" EntitySet="CustomerGroup" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CustomerGroup">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+            <PropertyRef Name="Groupid" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="Groupid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ShortName" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="MnCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phones" Type="nvarchar" MaxLength="25" />
+          <Property Name="Contract" Type="nvarchar" MaxLength="20" />
+          <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="2" />
+          <Property Name="PostCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="400" />
+          <Property Name="Manualno" Type="nvarchar" MaxLength="20" />
+          <Property Name="Fexs" Type="nvarchar" MaxLength="20" />
+          <Property Name="Banks" Type="nvarchar" MaxLength="500" />
+          <Property Name="Account" Type="nvarchar" MaxLength="20" />
+          <Property Name="Mobiles" Type="nvarchar" MaxLength="50" />
+          <Property Name="Emails" Type="nvarchar" MaxLength="255" />
+          <Property Name="Idcard" Type="nvarchar" MaxLength="20" />
+          <Property Name="Trade" Type="bit" Nullable="false" />
+          <Property Name="Sign" Type="bit" Nullable="false" />
+          <Property Name="Isbatch" Type="bit" Nullable="false" />
+          <Property Name="LastExport" Type="datetime" />
+          <Property Name="Ispay" Type="bit" Nullable="false" />
+          <Property Name="Modifyuser" Type="nvarchar" Nullable="false" MaxLength="12" />
+          <Property Name="Modifytime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="Groupid" />
+          </Key>
+          <Property Name="Groupid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Groupname" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="Modifyuser" Type="nvarchar" Nullable="false" MaxLength="12" />
+          <Property Name="Modifytime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CustomerGroup_Customers_CustomerId">
+          <End Role="Customers" Type="LogisticsModel.Store.Customers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CustomerGroup" Type="LogisticsModel.Store.CustomerGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="CustomerGroup">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerGroup_Groups_Groupid">
+          <End Role="Groups" Type="LogisticsModel.Store.Groups" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CustomerGroup" Type="LogisticsModel.Store.CustomerGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Groupid" />
+            </Principal>
+            <Dependent Role="CustomerGroup">
+              <PropertyRef Name="Groupid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LogisticsModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="LogisticsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="LogisticsModel.Customer" />
+          <EntitySet Name="Groups" EntityType="LogisticsModel.Group" />
+          <AssociationSet Name="CustomerGroup" Association="LogisticsModel.CustomerGroup">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MnCode" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Phones" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="Contract" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="2" Unicode="true" FixedLength="false" />
+          <Property Name="PostCode" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="Remarks" Type="String" MaxLength="400" Unicode="true" FixedLength="false" />
+          <Property Name="Manualno" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Fexs" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Banks" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Account" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Mobiles" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Emails" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Idcard" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Trade" Type="Boolean" Nullable="false" />
+          <Property Name="Sign" Type="Boolean" Nullable="false" />
+          <Property Name="Isbatch" Type="Boolean" Nullable="false" />
+          <Property Name="LastExport" Type="DateTime" />
+          <Property Name="Ispay" Type="Boolean" Nullable="false" />
+          <Property Name="Modifyuser" Type="String" Nullable="false" MaxLength="12" Unicode="true" FixedLength="false" />
+          <Property Name="Modifytime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Groups" Relationship="LogisticsModel.CustomerGroup" FromRole="Customers" ToRole="Groups" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Groupid" />
+          </Key>
+          <Property Name="Groupid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Groupname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Modifyuser" Type="String" Nullable="false" MaxLength="12" Unicode="true" FixedLength="false" />
+          <Property Name="Modifytime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="LogisticsModel.CustomerGroup" FromRole="Groups" ToRole="Customers" />
+        </EntityType>
+        <Association Name="CustomerGroup">
+          <End Role="Customers" Type="LogisticsModel.Customer" Multiplicity="*" />
+          <End Role="Groups" Type="LogisticsModel.Group" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LogisticsModelStoreContainer" CdmEntityContainer="LogisticsEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="LogisticsModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="MnCode" ColumnName="MnCode" />
+                <ScalarProperty Name="Phones" ColumnName="Phones" />
+                <ScalarProperty Name="Contract" ColumnName="Contract" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Manualno" ColumnName="Manualno" />
+                <ScalarProperty Name="Fexs" ColumnName="Fexs" />
+                <ScalarProperty Name="Banks" ColumnName="Banks" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Mobiles" ColumnName="Mobiles" />
+                <ScalarProperty Name="Emails" ColumnName="Emails" />
+                <ScalarProperty Name="Idcard" ColumnName="Idcard" />
+                <ScalarProperty Name="Trade" ColumnName="Trade" />
+                <ScalarProperty Name="Sign" ColumnName="Sign" />
+                <ScalarProperty Name="Isbatch" ColumnName="Isbatch" />
+                <ScalarProperty Name="LastExport" ColumnName="LastExport" />
+                <ScalarProperty Name="Ispay" ColumnName="Ispay" />
+                <ScalarProperty Name="Modifyuser" ColumnName="Modifyuser" />
+                <ScalarProperty Name="Modifytime" ColumnName="Modifytime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="LogisticsModel.Group">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="Groupid" ColumnName="Groupid" />
+                <ScalarProperty Name="Groupname" ColumnName="Groupname" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Modifyuser" ColumnName="Modifyuser" />
+                <ScalarProperty Name="Modifytime" ColumnName="Modifytime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CustomerGroup" TypeName="LogisticsModel.CustomerGroup" StoreEntitySet="CustomerGroup">
+            <EndProperty Name="Customers">
+              <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+            </EndProperty>
+            <EndProperty Name="Groups">
+              <ScalarProperty Name="Groupid" ColumnName="Groupid" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Mvc" ZoomLevel="92">
+        <EntityTypeShape EntityType="LogisticsModel.Customer" Width="1.5" PointX="0.75" PointY="1.125" Height="5.8263151041666674" IsExpanded="true" />
+        <EntityTypeShape EntityType="LogisticsModel.Group" Width="1.5" PointX="3" PointY="3" Height="2.1725878906249996" IsExpanded="true" />
+        <AssociationConnector Association="LogisticsModel.CustomerGroup" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="4.0862939453125" />
+          <ConnectorPoint PointX="3" PointY="4.0862939453125" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
