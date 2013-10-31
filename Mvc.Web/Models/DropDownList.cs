@@ -1,22 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Mvc.Web.Models;
-using Mvc.Data.Repository;
 using Ninject;
 
-namespace Mvc.Web.Models
-{
-
+namespace Mvc.Web.Models {
     public interface IViewRepository {
-
     }
 
     //the types of dropdownlist
-    public enum DropDownListType
-    {
+    public enum DropDownListType {
         Empty = 0,
         Role,
         OS,
@@ -36,8 +29,7 @@ namespace Mvc.Web.Models
     /// <summary>
     /// Manage all dropdownlist used in the system.
     /// </summary>
-    public class DropDownList : List<SelectListItem>
-    {
+    public class DropDownList : List<SelectListItem> {
         [Inject]
         public IViewRepository vRep { get; set; }
 
@@ -121,7 +113,6 @@ namespace Mvc.Web.Models
         //        new SelectListItem { Text="11", Value="11"},
         //        new SelectListItem { Text="12", Value="12"},
         //};
-
 
         ///// <summary>
         ///// Get dropdownlist item text.
@@ -219,7 +210,7 @@ namespace Mvc.Web.Models
         //}
 
         ///// <summary>
-        ///// Initialize menu list items of menu dropdownlist. 
+        ///// Initialize menu list items of menu dropdownlist.
         ///// </summary>
         //private IEnumerable<SelectListItem> GetMenuTree()
         //{
@@ -242,19 +233,15 @@ namespace Mvc.Web.Models
         /// <summary>
         /// Listitem comparison class
         /// </summary>
-        public class SelectListComparor : IEqualityComparer<SelectListItem>
-        {
-            public bool Equals(SelectListItem x, SelectListItem y)
-            {
+        public class SelectListComparor : IEqualityComparer<SelectListItem> {
+            public bool Equals(SelectListItem x, SelectListItem y) {
                 return x.Value == y.Value
                         && x.Text == y.Text;
             }
 
-            public int GetHashCode(SelectListItem obj)
-            {
+            public int GetHashCode(SelectListItem obj) {
                 return obj.Value.GetHashCode() + obj.Text.GetHashCode();
             }
         }
-
     }
 }

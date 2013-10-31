@@ -5,24 +5,16 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-    <link href="@Url.Content("~/Content/menu.css")" rel="stylesheet" type="text/css" />
-    @*@Scripts.Render("~/bundles/modernizr")*@
-    <style type="text/css">
-        #nav
-        {
-            position: absolute;
-            width: 100%;
-            width: 900px;
-            margin: 0 auto;
-        }
-    </style>
+    @*@Scripts.Render(" /bundles/modernizr")*@
 </head>
 <body>
-    <div id="nav">
-        @*@Html.Partial("_navdemo")*@
-        @{Html.RenderAction("Menu", "Home");}
+    <div id="header">
     </div>
-    @RenderBody()
+    <div id="main">
+        @RenderBody()
+    </div>
+    <div id="footer">
+    </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)

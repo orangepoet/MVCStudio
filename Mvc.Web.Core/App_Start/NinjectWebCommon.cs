@@ -10,6 +10,7 @@ namespace Mvc.Web.Core.App_Start {
     using Mvc.Data.Repository.Impl;
     using Mvc.Data.UnitOfWork;
     using Mvc.Data.UnitOfWork.Impl;
+    using Mvc.BLL;
     using Ninject;
     using Ninject.Web.Common;
 
@@ -51,8 +52,9 @@ namespace Mvc.Web.Core.App_Start {
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel) {
             kernel.Bind<MvcEntities>().ToSelf().InRequestScope();
-            kernel.Bind<ICustomerRepository>().To<CustomerRepository>();
             kernel.Bind<IUnitOfWork>().To<EFRepositoryContext>();
+            kernel.Bind<ICustomerRepository>().To<CustomerRepository>();
+            kernel.Bind<IBLL_Customer>().To<BLL_Customer>();
         }
     }
 }

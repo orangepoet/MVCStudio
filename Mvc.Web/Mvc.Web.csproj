@@ -272,13 +272,17 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mvc.Data\Mvc.Data.csproj">
-      <Project>{9DE4D10A-AE59-43B4-BF2F-DB9CC84C09EB}</Project>
-      <Name>Mvc.Data</Name>
+    <ProjectReference Include="..\Mvc.BLL\Mvc.BLL.csproj">
+      <Project>{121C48B9-3434-4E8A-883E-D4FD8A8EE8BD}</Project>
+      <Name>Mvc.BLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mvc.Models\Mvc.Models.csproj">
       <Project>{2B858984-6E3A-4964-8E80-69F12CCDEA3C}</Project>
       <Name>Mvc.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mvc.Res\Mvc.Res.csproj">
+      <Project>{F586A6EC-725D-464F-9A8F-577A4C338C8E}</Project>
+      <Name>Mvc.Res</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mvc.Web.Core\Mvc.Web.Core.csproj">
       <Project>{99E64E15-0DF6-43CE-BB1E-AE10C23FC662}</Project>
@@ -345,6 +349,9 @@
   <ItemGroup>
     <Content Include="Areas\Admin\Views\SysUser\Index.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -359,12 +366,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>59698</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost/mvc</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

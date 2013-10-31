@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Xml.Linq;
 using Mvc.Web.Models;
 using System.Net;
+using res = Mvc.Res.Models.Book.Book;
 
 namespace Mvc.Web.Controllers {
     public class HomeController : AsyncController {
@@ -16,6 +17,7 @@ namespace Mvc.Web.Controllers {
 
         public ActionResult Index() {
             return View();
+            string errMsg = res.ResourceManager.GetString("ErrMsg");
         }
 
         private void GetMenuFromXML(DoWorkEventArgs e) {
@@ -38,7 +40,7 @@ namespace Mvc.Web.Controllers {
 
         public ActionResult DataCompleted(string Data) {
             return Content(Data);
-        } 
+        }
         #endregion
 
         private IList<MenuItem> GetMenuFromXML() {
