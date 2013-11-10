@@ -1,0 +1,7 @@
+﻿@model IEnumerable<Mvc.Web.Controllers.HomeController.Appointment>
+@foreach (var item in Model) {
+    <tr>
+        <td>@item.ClientName</td>
+        <td>@item.Date</td>
+    </tr>
+}

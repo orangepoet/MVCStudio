@@ -43,8 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL_Customer.cs" />
-    <Compile Include="IBLL_Customer.cs" />
+    <Compile Include="Impl\CustomerMgr.cs" />
+    <Compile Include="ICustomerMgr.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

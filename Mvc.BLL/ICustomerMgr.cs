@@ -1,6 +1,6 @@
 ﻿using System;
 namespace Mvc.BLL {
-    public interface IBLL_Customer {
+    public interface ICustomerMgr {
         void AddCustomer(Mvc.Models.Entities.Customer c);
         Mvc.Models.Entities.Customer GetCustomer(int id);
         System.Linq.IQueryable<Mvc.Models.Entities.Customer> GetCustomers();

@@ -13,7 +13,7 @@ namespace Mvc.Web.Controllers {
         private const int pageSize = 10;
 
         [Inject]
-        public IBLL_Customer bl { get; set; }
+        public ICustomerMgr bl { get; set; }
         //BL_Customer bl = new BL_Customer();
 
         //[AutoRefresh(DurationInSeconds = 10)]
@@ -78,7 +78,7 @@ namespace Mvc.Web.Controllers {
                     c.Modifyuser = User.Identity.Name;
                     //rep.Add(c);
                     //rep.UnitOfWork.Commit();
-                    new BLL_Customer().AddCustomer(c);
+                    bl.AddCustomer(c);
                     RedirectToAction("Index");
                 } catch (Exception ex) {
                     ModelState.AddModelError("CreateError", ex.Message);

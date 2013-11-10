@@ -7,8 +7,8 @@ using Mvc.Data.Repository;
 using Ninject;
 using System.Linq.Expressions;
 
-namespace Mvc.BLL {
-    public class BLL_Customer : Mvc.BLL.IBLL_Customer {
+namespace Mvc.BLL.Impl {
+    public class CustomerMgr : Mvc.BLL.ICustomerMgr {
 
         [Inject]
         public ICustomerRepository rep { get; set; }
