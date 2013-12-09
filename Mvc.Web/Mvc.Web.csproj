@@ -16,6 +16,10 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -130,6 +134,8 @@
     <Compile Include="Areas\Visitor\VisitorAreaRegistration.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PdfController.cs" />
+    <Compile Include="Controllers\PdfSampleController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -137,6 +143,7 @@
     <Compile Include="Models\DropDownList.cs" />
     <Compile Include="Models\GridView.cs" />
     <Compile Include="Models\MenuItem.cs" />
+    <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +184,7 @@
     <Content Include="Content\logistics.css" />
     <Content Include="Content\nav.css" />
     <Content Include="Content\right.gif" />
+    <Content Include="Content\sample.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -359,6 +367,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\SysUser\About.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PdfSample\About.cshtml" />
+    <Content Include="Views\PdfSample\HtmlReport.cshtml" />
+    <Content Include="Views\PdfSample\Index.cshtml" />
+    <Content Include="Views\PdfSample\Simple.cshtml" />
+    <Content Include="Views\PdfSample\PdfModel.cshtml" />
+    <Content Include="Views\PdfSample\PdfSample.cshtml" />
+    <Content Include="Views\PdfSample\ReportSample.cshtml" />
+    <Content Include="Views\PdfSample\SUDemo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_PdfLayout.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
