@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace Mvc.BLL {
-    public class Class1 {
+	public class Class1 {
+		// start
     }
 }

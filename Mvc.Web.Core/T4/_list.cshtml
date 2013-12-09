@@ -1,0 +1,32 @@
+@model PagedList<Lib.Mvc4App.Models.Contract>
+@{
+	int seq = (Model.PageIndex -1)* Model.PageSize;
+}
+@if(Model != null && Model.PageCount > 0) {
+	<table class="list">
+		<tr>
+			<th>seq</th>
+			<th>operation</th>
+		</tr>
+		@foreach (var item in Model) {
+		<tr>
+			<td>@Html.ActionLink((++seq).ToString(), "Details", new {id=item.Id })</td>
+			<td>
+				@Html.ImageLink(Url.Action("Edit", new { id = item.Id }), Url.Content("~/Content/images/icon-edit.gif"))
+                @if (item.Status != "D") { 
+                    @Ajax.ImageLink(null, new AjaxOptions {
+                        Confirm = "È·ÈÏÉ¾³ýÂð?",
+                        HttpMethod = "Post",
+						OnFailure="ActionErr",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "list",
+                    }, Url.Action("Delete", new { id = item.Id, pageIndex = Model.PageIndex }), Url.Content("~/Content/images/icon_del.gif"))
+                }
+			</td>
+		</tr>
+		}
+	</table>
+	<nav class="center">
+		@Html.PageLinks(Model.PageCount, Model.PageIndex, i => Url.Action("Index", new { pageIndex = i }))
+	</nav>
+}
