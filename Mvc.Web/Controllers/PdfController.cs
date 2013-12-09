@@ -23,25 +23,4 @@ namespace Mvc.Web.Controllers {
             return new PdfResult(model, viewName, pdfDownloadName);
         }
     }
-
-    public static class ControllerExt {
-        public static ViewResult Pdf(this Controller controller) {
-            return new PdfResult();
-        }
-
-        public static ViewResult Pdf(this Controller controller
-            , object model) {
-            return new PdfResult(model);
-        }
-
-        public static ViewResult Pdf(this Controller controller
-            , object model, string viewName) {
-            return new PdfResult(model, viewName);
-        }
-
-        public static ViewResult Pdf(this Controller controller
-            , object model, string viewName, string pdfDownloadName) {
-            return new PdfResult(model, viewName, pdfDownloadName);
-        }
-    }
 }
