@@ -38,7 +38,7 @@ namespace Mvc.Web.Controllers {
 
         public ActionResult DataCompleted(string Data) {
             return Content(Data);
-        } 
+        }
         #endregion
 
         private IList<MenuItem> GetMenuFromXML() {
@@ -93,6 +93,16 @@ namespace Mvc.Web.Controllers {
                 url = string.Format("{0}/{1}/{2}", root, lang, referrerPath.Trim('/'));
             }
             return this.Redirect(url);
+        }
+
+        public JsonResult Book() {
+            return Json(new { Msg = "Success" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JavaScriptResult Book(FormCollection forms) {
+            //return Json(new { Msg = "Success" }, "text/html",JsonRequestBehavior.DenyGet);
+            return JavaScript("alert('ss')");
         }
     }
 }

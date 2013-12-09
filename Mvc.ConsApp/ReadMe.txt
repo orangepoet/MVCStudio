@@ -1,3 +1,0 @@
-﻿这个部分是对基于Database First转为Code First的实现,生成后需要
-1)将Mapping及Context文件放到Mvc.Data模块
-2)将Entities文件放到Mvc.Models模块

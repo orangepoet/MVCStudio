@@ -10,10 +10,14 @@
     <style type="text/css">
         #nav
         {
-            position: absolute;
-            width: 100%;
-            width: 900px;
-            margin: 0 auto;
+            float: left;
+            width: 150px;
+        }
+        #main
+        {
+            margin-left: 160px;
+            border-left: 1px solid black;
+            padding-left: 10px;
         }
     </style>
 </head>
@@ -22,7 +26,9 @@
         @*@Html.Partial("_navdemo")*@
         @{Html.RenderAction("Menu", "Home");}
     </div>
-    @RenderBody()
+    <div id="main">
+        @RenderBody()
+    </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
