@@ -1,0 +1,10 @@
+@model Lib.Mvc4App.Models.Contract
+@if(Model != null) {
+    <table>
+		</tr>
+    </table>
+    <p class="center">
+        <input type="button" value="±à¼­" onclick="window.location='@Url.Action("Edit", new { id = Model.Id })'" />
+        <input type="button" value="·µ»Ø" onclick="window.location='@Url.Action("Index")'" />
+    </p>
+}

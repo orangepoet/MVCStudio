@@ -105,6 +105,14 @@ namespace Mvc.Web.Controllers {
                 new Appointment { ClientName = "Jane", Date = DateTime.Parse("1/20/2012")},
                 new Appointment { ClientName = "Jane", Date = DateTime.Parse("1/22/2012")},
                 new Appointment {ClientName = "Bob", Date = DateTime.Parse("2/25/2012")},
+        public JsonResult Book() {
+            return Json(new { Msg = "Success" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JavaScriptResult Book(FormCollection forms) {
+            //return Json(new { Msg = "Success" }, "text/html",JsonRequestBehavior.DenyGet);
+            return JavaScript("alert('ss')");
                 new Appointment {ClientName = "Bob", Date = DateTime.Parse("2/25/2013")}
                 };
             if (!string.IsNullOrEmpty(id) && id != "All") {

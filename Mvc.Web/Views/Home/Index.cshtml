@@ -23,6 +23,20 @@
                 <th>
                     Appointment Dates
                 </th>
+@Ajax.ActionLink("Test", "Book", new AjaxOptions { OnSuccess = "OnSuccess" })
+@using (Ajax.BeginForm("Book", new AjaxOptions { OnSuccess = "OnSuccess" })) {
+    <input type="submit" name="submit" value="submit" />
+}
+@section scripts{
+    <script type="text/javascript">
+        function OnSuccess(data) {
+            if (data != undefined) {
+                alert(data.Msg);
+            }
+        }
+    </script>
+}
+
             </tr>
         </thead>
         <tbody id="tabledata">

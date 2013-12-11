@@ -19,4 +19,7 @@
     <menu name="测试" action="Index" controller="Test"></menu>
     <menu name="水电" action="Index" controller="Charge"></menu>
   </menu>
+  <menu name="功能展示">
+    <menu name="Pdf" action="Index" controller="PdfSample"></menu>
+  </menu>
 </root>

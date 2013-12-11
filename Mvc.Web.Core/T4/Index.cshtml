@@ -1,0 +1,15 @@
+@model PagedList<Lib.Mvc4App.Models.Contract>
+@{
+    ViewBag.Title = "Contract";
+}
+<h2>
+    Contract</h2>
+<div class="toolbar">
+    @Html.ToolBar(Url, new ToolBarAction[] 
+    { 
+        ToolBarAction.Create, 
+    })
+</div>
+<div id="list">
+    @Html.Partial("_list", Model)
+</div>

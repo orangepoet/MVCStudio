@@ -16,6 +16,10 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -127,8 +131,11 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\SysUserController.cs" />
+    <Compile Include="Areas\Visitor\VisitorAreaRegistration.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PdfController.cs" />
+    <Compile Include="Controllers\PdfSampleController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -136,6 +143,7 @@
     <Compile Include="Models\DropDownList.cs" />
     <Compile Include="Models\GridView.cs" />
     <Compile Include="Models\MenuItem.cs" />
+    <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +184,7 @@
     <Content Include="Content\logistics.css" />
     <Content Include="Content\nav.css" />
     <Content Include="Content\right.gif" />
+    <Content Include="Content\sample.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -344,16 +353,39 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Visitor\Controllers\" />
+    <Folder Include="Areas\Visitor\Models\" />
+    <Folder Include="Areas\Visitor\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\SysUser\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+    <Content Include="Areas\Visitor\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\AppointmentData.cshtml" />
+s    <Content Include="Views\Home\AppointmentData.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\SysUser\About.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PdfSample\About.cshtml" />
+    <Content Include="Views\PdfSample\HtmlReport.cshtml" />
+    <Content Include="Views\PdfSample\Index.cshtml" />
+    <Content Include="Views\PdfSample\Simple.cshtml" />
+    <Content Include="Views\PdfSample\PdfModel.cshtml" />
+    <Content Include="Views\PdfSample\PdfSample.cshtml" />
+    <Content Include="Views\PdfSample\ReportSample.cshtml" />
+    <Content Include="Views\PdfSample\SUDemo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_PdfLayout.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -373,7 +405,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>59698</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/mvc</IISUrl>
+          <IISUrl>http://localhost/ms</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

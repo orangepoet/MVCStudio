@@ -1,0 +1,15 @@
+@model Lib.Mvc4App.Models.Contract
+@{
+    ViewBag.Title = "Contract";
+}
+@section script
+{
+    @Content.Script("jquery/jquery.validate.min.js", Url)
+    @Content.Script("jquery/jquery.validate.unobtrusive.min.js", Url)
+}
+<h2>
+    Contract
+</h2>
+<div class="doc">
+    @Html.Partial("_edit")
+</div>

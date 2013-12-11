@@ -1,5 +1,6 @@
 [assembly: WebActivator.PreApplicationStartMethod(typeof(Mvc.Web.Core.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(Mvc.Web.Core.App_Start.NinjectWebCommon), "Stop")]
+
 namespace Mvc.Web.Core.App_Start {
     using System;
     using System.Web;
@@ -52,6 +53,7 @@ namespace Mvc.Web.Core.App_Start {
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel) {
             kernel.Bind<MvcEntities>().ToSelf().InRequestScope();
+            kernel.Bind<ICustomerRepository>().To<CustomerRepository>();
             kernel.Bind<IUnitOfWork>().To<EFRepositoryContext>();
             kernel.Bind<ICustomerRepository>().To<CustomerRepository>();
             kernel.Bind<ICustomerMgr>().To<CustomerMgr>();

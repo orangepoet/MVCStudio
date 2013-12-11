@@ -17,7 +17,7 @@ namespace Mvc.Data.UnitOfWork.Impl {
         private bool isCommitted = false;
 
         [Inject]
-        public MvcEntities _context { get; set; }
+        public LogisticsEntities _context { get; set; }
 
         public DbSet<TEntity> Set<TEntity>() where TEntity : Entity {
             return _context.Set<TEntity>();

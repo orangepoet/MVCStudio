@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>@ViewBag.Message</h2>
+<p>
+    To learn more about RazorPDF visit: <a href="http://nyveldt.com/blog/page/razorpdf" title="RazorPDF">http://nyveldt.com/blog/page/razorpdf</a>.
+</p>
+<ul>
+    <li>@Html.ActionLink("Simple PDF", "Simple")</li>
+    <li>@Html.ActionLink("Typical PDF with a Model, ViewBag, etc", "PDFModel", new { id = "yoda" })</li>
+    <li>@Html.ActionLink("Same PDF but different", "PDFTake3", new { id = "anakin" })</li>
+    <li>@Html.ActionLink("Html Sample to PDF", "HtmlReport", new { format = "pdf" })</li>
+    <li>@Html.ActionLink("Html Sample as Html", "HtmlReport")</li>
+    <li>@Html.ActionLink("Sample Report - Good iText XML sample", "ReportSample")</li>
+    <a href="@Url.Action("SUDemo")" target="_blank">SU - Demo</a>
+</ul>

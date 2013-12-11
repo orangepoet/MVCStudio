@@ -13,5 +13,9 @@ namespace Mvc.Web.Areas.Admin.Controllers {
             return View();
         }
 
+        public ActionResult About() {
+            return View();
+        }
+
     }
 }
