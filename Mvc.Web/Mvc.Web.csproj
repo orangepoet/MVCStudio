@@ -365,7 +365,7 @@
     <Content Include="Areas\Visitor\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-s    <Content Include="Views\Home\AppointmentData.cshtml" />
+    <Content Include="Views\Home\AppointmentData.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
