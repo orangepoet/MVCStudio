@@ -52,7 +52,7 @@ namespace Mvc.Web.Core.App_Start {
         /// </summary>
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel) {
-            kernel.Bind<MvcEntities>().ToSelf().InRequestScope();
+            kernel.Bind<LogisticsEntities>().ToSelf().InRequestScope();
             kernel.Bind<ICustomerRepository>().To<CustomerRepository>();
             kernel.Bind<IUnitOfWork>().To<EFRepositoryContext>();
             kernel.Bind<ICustomerRepository>().To<CustomerRepository>();

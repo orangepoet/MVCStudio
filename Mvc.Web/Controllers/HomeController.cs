@@ -105,6 +105,13 @@ namespace Mvc.Web.Controllers {
                 new Appointment { ClientName = "Jane", Date = DateTime.Parse("1/20/2012")},
                 new Appointment { ClientName = "Jane", Date = DateTime.Parse("1/22/2012")},
                 new Appointment {ClientName = "Bob", Date = DateTime.Parse("2/25/2012")},
+            };
+            if (!string.IsNullOrEmpty(id) && id != "All") {
+                data = data.Where(e => e.ClientName == id);
+            }
+            return PartialView(data);
+        }
+
         public JsonResult Book() {
             return Json(new { Msg = "Success" }, JsonRequestBehavior.AllowGet);
         }
@@ -113,12 +120,6 @@ namespace Mvc.Web.Controllers {
         public JavaScriptResult Book(FormCollection forms) {
             //return Json(new { Msg = "Success" }, "text/html",JsonRequestBehavior.DenyGet);
             return JavaScript("alert('ss')");
-                new Appointment {ClientName = "Bob", Date = DateTime.Parse("2/25/2013")}
-                };
-            if (!string.IsNullOrEmpty(id) && id != "All") {
-                data = data.Where(e => e.ClientName == id);
-            }
-            return PartialView(data);
         }
 
         public class Appointment {
