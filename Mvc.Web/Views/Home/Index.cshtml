@@ -1,6 +1,12 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
+<style>
+    .hidfileupload
+    {
+        opacity:0;
+    }
+</style>
 <h2>
     Welcome!</h2>
 @{Html.RenderAction("Data");}
@@ -8,12 +14,29 @@
 @using (Ajax.BeginForm("Book", new AjaxOptions { OnSuccess = "OnSuccess" })) {
     <input type="submit" name="submit" value="submit" />
 }
+<form action="@Url.Action("Upload")" method="post" enctype="multipart/form-data">
+    <a id="aupload" href="#">Click Me</a>
+    <input type="button" id="btnsubmit" name="btnsubmit" value="submit" />
+    <input class="hidfileupload" type="file" name="file" id="file" value="browse" />
+</form>
 @section scripts{
+    <script src="@Url.Content("~/Scripts/jquery.form.js")"></script>
     <script type="text/javascript">
         function OnSuccess(data) {
             if (data != undefined) {
                 alert(data.Msg);
             }
         }
+        $(function () {
+            $("#btnsubmit").click(function () {
+                $form = $(this).closest("form");
+                $form.ajaxSubmit(function (data) {
+                    alert(data);
+                });
+            });
+            $("#aupload").click(function () {
+                $(".hidfileupload").trigger("click");
+            });
+        })
     </script>
 }

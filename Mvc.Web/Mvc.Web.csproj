@@ -242,6 +242,7 @@
     <Content Include="DevTrends.MvcDonutCaching.README.txt" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\jquery.form.js" />
     <Content Include="Scripts\logistics.js" />
     <Content Include="XML\menu.xml">
       <SubType>Designer</SubType>
@@ -352,6 +353,7 @@
     <Folder Include="Areas\Visitor\Controllers\" />
     <Folder Include="Areas\Visitor\Models\" />
     <Folder Include="Areas\Visitor\Views\Shared\" />
+    <Folder Include="Files\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\SysUser\Index.cshtml" />
@@ -395,16 +397,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>59698</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/ms</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

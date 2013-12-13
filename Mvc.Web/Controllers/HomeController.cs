@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Xml.Linq;
 using Mvc.Web.Models;
 using System.Net;
+using System.Web;
 
 namespace Mvc.Web.Controllers {
     public class HomeController : AsyncController {
@@ -103,6 +104,16 @@ namespace Mvc.Web.Controllers {
         public JavaScriptResult Book(FormCollection forms) {
             //return Json(new { Msg = "Success" }, "text/html",JsonRequestBehavior.DenyGet);
             return JavaScript("alert('ss')");
+        }
+
+        [HttpPost]
+        public ActionResult Upload(HttpPostedFileBase file) {
+            file.SaveAs(Server.MapPath("~/Files/" + file.FileName));
+            if (file != null) {
+                return Json("OK");
+            } else {
+                return Json("Bad");
+            }
         }
     }
 }
