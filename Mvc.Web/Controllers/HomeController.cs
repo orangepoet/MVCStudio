@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Xml.Linq;
 using Mvc.Web.Models;
-using System.Net;
 using System.Web;
 
 namespace Mvc.Web.Controllers {
@@ -15,8 +14,9 @@ namespace Mvc.Web.Controllers {
         //
         // GET: /Home/
 
-        public ActionResult Index() {
-            return View();
+        public ActionResult Index(string id) {
+            return View("Index", (object)id);
+            //string errMsg = res.ResourceManager.GetString("ErrMsg");
         }
 
         private void GetMenuFromXML(DoWorkEventArgs e) {
@@ -29,6 +29,7 @@ namespace Mvc.Web.Controllers {
         }
 
         #region Async Actions
+
         public void DataAsync() {
             AsyncManager.OutstandingOperations.Increment();
             Task.Factory.StartNew(() => {
@@ -40,7 +41,8 @@ namespace Mvc.Web.Controllers {
         public ActionResult DataCompleted(string Data) {
             return Content(Data);
         }
-        #endregion
+
+        #endregion Async Actions
 
         private IList<MenuItem> GetMenuFromXML() {
             //var list = service.GetList(null);
@@ -96,6 +98,21 @@ namespace Mvc.Web.Controllers {
             return this.Redirect(url);
         }
 
+        public ActionResult AppointmentData(string id) {
+            IEnumerable<Appointment> data = new[] {
+                new Appointment { ClientName = "Joe", Date = DateTime.Parse("1/1/2012")},
+                new Appointment { ClientName = "Joe", Date = DateTime.Parse("2/1/2012")},
+                new Appointment { ClientName = "Joe", Date = DateTime.Parse("3/1/2012")},
+                new Appointment { ClientName = "Jane", Date = DateTime.Parse("1/20/2012")},
+                new Appointment { ClientName = "Jane", Date = DateTime.Parse("1/22/2012")},
+                new Appointment {ClientName = "Bob", Date = DateTime.Parse("2/25/2012")},
+            };
+            if (!string.IsNullOrEmpty(id) && id != "All") {
+                data = data.Where(e => e.ClientName == id);
+            }
+            return PartialView(data);
+        }
+
         public JsonResult Book() {
             return Json(new { Msg = "Success" }, JsonRequestBehavior.AllowGet);
         }
@@ -106,6 +123,16 @@ namespace Mvc.Web.Controllers {
             return JavaScript("alert('ss')");
         }
 
+        public class Appointment {
+            public string ClientName { get; set; }
+            public DateTime Date { get; set; }
+            if (file != null) {
+                return Json("OK");
+            } else {
+                return Json("Bad");
+            }
+        }
+        
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase file) {
             file.SaveAs(Server.MapPath("~/Files/" + file.FileName));

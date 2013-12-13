@@ -5,6 +5,8 @@ namespace Mvc.Web.Core.App_Start {
     using System;
     using System.Web;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+    using Mvc.BLL;
+    using Mvc.BLL.Impl;
     using Mvc.Data;
     using Mvc.Data.Repository;
     using Mvc.Data.Repository.Impl;
@@ -53,6 +55,8 @@ namespace Mvc.Web.Core.App_Start {
             kernel.Bind<LogisticsEntities>().ToSelf().InRequestScope();
             kernel.Bind<ICustomerRepository>().To<CustomerRepository>();
             kernel.Bind<IUnitOfWork>().To<EFRepositoryContext>();
+            kernel.Bind<ICustomerRepository>().To<CustomerRepository>();
+            kernel.Bind<ICustomerMgr>().To<CustomerMgr>();
         }
     }
 }

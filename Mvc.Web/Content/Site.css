@@ -32,7 +32,7 @@ ul#nav li {
  
 ul#nav li a {
   float: left;
-  font: bold 1.1em arial,verdana,tahoma,sans-serif;
+  font: bold -37em arial,verdana,tahoma,sans-serif;
   line-height: 40px;
   color: #fff;
   text-decoration: none;

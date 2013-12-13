@@ -1,26 +1,20 @@
 ﻿using System;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Web;
-using System.Web.Caching;
 using System.Web.Mvc;
-using DevTrends.MvcDonutCaching;
+using Mvc.BLL;
 using Mvc.Models.Entities;
-using Mvc.Data.Repository;
-using Mvc.Web.Core.Exts;
-using Mvc.Web.Core.Filters;
 using Mvc.Web.Core.Utils;
+using Mvc.Web.Core.Exts;
 using Ninject;
-using System.Diagnostics;
 
 namespace Mvc.Web.Controllers {
-
     //[Authorize]
     public class CustomerController : Controller {
         private const int pageSize = 10;
 
         [Inject]
-        public ICustomerRepository rep { get; set; }
+        public ICustomerMgr bl { get; set; }
+        //BL_Customer bl = new BL_Customer();
 
         //[AutoRefresh(DurationInSeconds = 10)]
         //[OutputCache(CacheProfile = "customercache")]
@@ -52,7 +46,7 @@ namespace Mvc.Web.Controllers {
             //    HttpRuntime.Cache.Insert(key, model, dependency);
             //}
 
-            var model = rep.All
+            var model = bl.GetCustomers()
                        .Where(c => c.Status != "D")
                        .OrderByDescending(c => c.CustomerId)
                        .ToPagedList(pageIndex, pageSize);
@@ -62,13 +56,13 @@ namespace Mvc.Web.Controllers {
 
         public PartialViewResult PopUp(int pageIndex = 1) {
             return PartialView(new PagedList<Customer>(
-                                           rep.All.Where(c => c.Status != "D"),
+                                           bl.GetCustomers().Where(c => c.Status != "D"),
                                            pageIndex,
                                            10));
         }
 
         public ViewResult Details(int id) {
-            return View(rep.Get(id));
+            return View(bl.GetCustomer(id));
         }
 
         public ActionResult Create() {
@@ -76,14 +70,15 @@ namespace Mvc.Web.Controllers {
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Create(Customer c) {
             if (ModelState.IsValid) {
                 try {
                     c.Modifytime = DateTime.Now;
                     c.Modifyuser = User.Identity.Name;
-                    rep.Add(c);
-                    rep.UnitOfWork.Commit();
+                    //rep.Add(c);
+                    //rep.UnitOfWork.Commit();
+                    bl.AddCustomer(c);
                     RedirectToAction("Index");
                 } catch (Exception ex) {
                     ModelState.AddModelError("CreateError", ex.Message);
@@ -93,17 +88,16 @@ namespace Mvc.Web.Controllers {
         }
 
         public ActionResult Edit(int id) {
-            return View(rep.Get(id));
+            return View(bl.GetCustomer(id));
         }
 
         [HttpPost]
         public ActionResult Edit(int CustomerId, FormCollection forms) {
-            var model = rep.Get(CustomerId);
+            var model = bl.GetCustomer(CustomerId);
             if (TryUpdateModel(model)) {
                 model.Modifyuser = User.Identity.Name;
                 model.Modifytime = DateTime.Now;
-                rep.Update(model);
-                rep.UnitOfWork.Commit();
+                bl.Update(model);
                 return RedirectToAction("Index");
             }
 
@@ -113,10 +107,9 @@ namespace Mvc.Web.Controllers {
         [HttpPost]
         public ActionResult Delete(int id, int pageIndex) {
             try {
-                var model = rep.Get(id);
+                var model = bl.GetCustomer(id);
                 model.Status = "D";
-                rep.Update(model);
-                rep.UnitOfWork.Commit();
+                bl.Update(model);
             } catch (Exception) {
                 throw;
             }
@@ -125,11 +118,10 @@ namespace Mvc.Web.Controllers {
         }
 
         public ActionResult Modify() {
-            var m = rep.All.FirstOrDefault(c => c.Status != "D");
+            var m = bl.GetCustomers().FirstOrDefault(c => c.Status != "D");
             if (m != null) {
                 m.Status = "D";
-                rep.Update(m);
-                rep.UnitOfWork.Commit();
+                bl.Update(m);
             }
             return RedirectToAction("Index");
         }

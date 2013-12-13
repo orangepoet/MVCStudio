@@ -1,5 +1,10 @@
 ﻿@{
     ViewBag.Title = "Index";
+    AjaxOptions ajaxOpts = new AjaxOptions {
+        UpdateTargetId = "tabledata",
+        Url = Url.Action("AppointmentData"),
+        LoadingElementId = "loading"
+    }; 
 }
 <style>
     .hidfileupload
@@ -10,6 +15,20 @@
 <h2>
     Welcome!</h2>
 @{Html.RenderAction("Data");}
+<div id="loading" style="display: none; color: Red; font-weight: bold">
+    <p>
+        Loading Data...</p>
+</div>
+@using (Ajax.BeginForm(ajaxOpts)) { 
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Client Name
+                </th>
+                <th>
+                    Appointment Dates
+                </th>
 @Ajax.ActionLink("Test", "Book", new AjaxOptions { OnSuccess = "OnSuccess" })
 @using (Ajax.BeginForm("Book", new AjaxOptions { OnSuccess = "OnSuccess" })) {
     <input type="submit" name="submit" value="submit" />
@@ -39,4 +58,27 @@
             });
         })
     </script>
+}
+
+            </tr>
+        </thead>
+        <tbody id="tabledata">
+            @Html.Action("AppointmentData", new { id = Model })
+        </tbody>
+    </table> 
+    <p>
+        @Html.DropDownList("id", new SelectList(
+new[] { "All", "Joe", "Jane", "Bob" }, (Model ?? "All")))
+        <input type="submit" value="Submit" />
+    </p> 
+}
+@foreach (string str in new[] { "All", "Joe", "Jane", "Bob" }) { 
+    <div style="margin-right: 5px; float: left">
+        @Ajax.ActionLink(str, "Index", new { id = str },
+new AjaxOptions {
+    UpdateTargetId = "tabledata",
+    LoadingElementId = "loading",
+    Url = Url.Action("AppointmentData", new { id = str })
+})
+    </div> 
 }

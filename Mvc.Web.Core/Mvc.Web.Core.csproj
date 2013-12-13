@@ -133,6 +133,10 @@
     <Compile Include="Web\SessionHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mvc.BLL\Mvc.BLL.csproj">
+      <Project>{121C48B9-3434-4E8A-883E-D4FD8A8EE8BD}</Project>
+      <Name>Mvc.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mvc.Data\Mvc.Data.csproj">
       <Project>{9DE4D10A-AE59-43B4-BF2F-DB9CC84C09EB}</Project>
       <Name>Mvc.Data</Name>
