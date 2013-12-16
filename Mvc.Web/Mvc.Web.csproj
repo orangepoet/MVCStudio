@@ -42,6 +42,10 @@
     <Reference Include="DevTrends.MvcDonutCaching">
       <HintPath>..\packages\MvcDonutCaching.1.2.1\lib\net40\DevTrends.MvcDonutCaching.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
@@ -282,8 +286,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mvc.BLL\Mvc.BLL.csproj">
-      <Project>{121C48B9-3434-4E8A-883E-D4FD8A8EE8BD}</Project>
+      <Project>{121c48b9-3434-4e8a-883e-d4fd8a8ee8bd}</Project>
       <Name>Mvc.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mvc.Data\Mvc.Data.csproj">
+      <Project>{9de4d10a-ae59-43b4-bf2f-db9cc84c09eb}</Project>
+      <Name>Mvc.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mvc.Models\Mvc.Models.csproj">
       <Project>{2B858984-6E3A-4964-8E80-69F12CCDEA3C}</Project>

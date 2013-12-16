@@ -1,17 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Xml.Linq;
+using Mvc.Data.Repository;
+using Mvc.Data.Repository.Impl;
+using Mvc.Data.UnitOfWork.Impl;
 using Mvc.Web.Models;
+using Ninject;
 
 namespace Mvc.Web.Controllers {
     public class HomeController : AsyncController {
         //
         // GET: /Home/
+        [Inject]
+        public ICustomerRepository custRep { get; set; }
+
+        [Inject]
+        public IGroupRepository groupRep { get; set; }
+
 
         public ActionResult Index(string id) {
             return View("Index", (object)id);
@@ -125,6 +136,23 @@ namespace Mvc.Web.Controllers {
         public class Appointment {
             public string ClientName { get; set; }
             public DateTime Date { get; set; }
+        }
+
+        // 测试UnitOfWork
+        public void Test() {
+            custRep.Add(new Mvc.Models.Entities.Customer {
+                CustomerId = 1000, CustomerName = "test_data", Status = "A",
+                ShortName = "test", Modifyuser = "sa", Modifytime = DateTime.Now
+            });
+            groupRep.Add(new Mvc.Models.Entities.Group {
+                Groupid = 1000, Groupname = "test_data",
+                Modifyuser = "sa", Modifytime = DateTime.Now, Status = "A"
+            });
+            int result = groupRep.UnitOfWork.Commit();
+
+            Debug.WriteLine("custRep: " + (((EFRepositoryContext)custRep.UnitOfWork)._context.GetHashCode()));
+            Debug.WriteLine("groupRep: " + (((EFRepositoryContext)groupRep.UnitOfWork)._context.GetHashCode()));
+            Debug.WriteLine("result: " + result.ToString());
         }
     }
 }

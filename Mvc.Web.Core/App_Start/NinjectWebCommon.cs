@@ -54,8 +54,8 @@ namespace Mvc.Web.Core.App_Start {
         private static void RegisterServices(IKernel kernel) {
             kernel.Bind<LogisticsEntities>().ToSelf().InRequestScope();
             kernel.Bind<ICustomerRepository>().To<CustomerRepository>();
+            kernel.Bind<IGroupRepository>().To<GroupRepository>();
             kernel.Bind<IUnitOfWork>().To<EFRepositoryContext>();
-            kernel.Bind<ICustomerRepository>().To<CustomerRepository>();
             kernel.Bind<ICustomerMgr>().To<CustomerMgr>();
         }
     }
