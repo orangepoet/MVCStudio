@@ -46,9 +46,9 @@
     <Reference Include="Ionic.Zip">
       <HintPath>..\packages\NPOI.1.2.5\lib\net40\Ionic.Zip.dll</HintPath>
     </Reference>
-    <Reference Include="itextsharp, Version=4.1.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca">
-      <Private>True</Private>
-      <HintPath>..\packages\iTextSharp.4.1.2\lib\itextsharp.dll</HintPath>
+    <Reference Include="itextsharp, Version=5.4.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\iTextSharp.5.4.5\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
@@ -97,7 +97,6 @@
     <Compile Include="App_Start\NinjectWebCommon.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Exts\ExtController.cs" />
     <Compile Include="Filters\AnonymousAttribute.cs" />
     <Compile Include="Filters\AutoRefreshAttribute.cs" />
     <Compile Include="Filters\MustbeTrue.cs" />
@@ -106,8 +105,6 @@
     <Compile Include="IoC\NinjectDependencyResolver.cs" />
     <Compile Include="Filters\LogFilter.cs" />
     <Compile Include="Log\LogHelper.cs" />
-    <Compile Include="Pdf\PdfResult.cs" />
-    <Compile Include="Pdf\PdfView.cs" />
     <Compile Include="Utils\CookieDomainModule.cs" />
     <Compile Include="Utils\ExcelTemplate.cs" />
     <Compile Include="Utils\ImageHandler.cs" />
@@ -159,7 +156,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Pdf\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

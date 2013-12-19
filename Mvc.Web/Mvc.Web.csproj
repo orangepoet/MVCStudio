@@ -138,8 +138,6 @@
     <Compile Include="Areas\Visitor\VisitorAreaRegistration.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PdfController.cs" />
-    <Compile Include="Controllers\PdfSampleController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -381,19 +379,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\SysUser\About.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\PdfSample\About.cshtml" />
-    <Content Include="Views\PdfSample\HtmlReport.cshtml" />
-    <Content Include="Views\PdfSample\Index.cshtml" />
-    <Content Include="Views\PdfSample\Simple.cshtml" />
-    <Content Include="Views\PdfSample\PdfModel.cshtml" />
-    <Content Include="Views\PdfSample\PdfSample.cshtml" />
-    <Content Include="Views\PdfSample\ReportSample.cshtml" />
-    <Content Include="Views\PdfSample\SUDemo.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\_PdfLayout.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
