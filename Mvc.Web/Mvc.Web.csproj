@@ -138,6 +138,7 @@
     <Compile Include="Areas\Visitor\VisitorAreaRegistration.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PdfController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -244,6 +245,7 @@
     <Content Include="DevTrends.MvcDonutCaching.README.txt" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Pdf.html" />
     <Content Include="Scripts\logistics.js" />
     <Content Include="XML\menu.xml">
       <SubType>Designer</SubType>
@@ -379,6 +381,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\SysUser\About.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Pdf\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\fonts\ARIALUNI.TTF" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Pdf\Html.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

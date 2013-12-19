@@ -105,6 +105,7 @@
     <Compile Include="IoC\NinjectDependencyResolver.cs" />
     <Compile Include="Filters\LogFilter.cs" />
     <Compile Include="Log\LogHelper.cs" />
+    <Compile Include="Pdf\PdfViewResult.cs" />
     <Compile Include="Utils\CookieDomainModule.cs" />
     <Compile Include="Utils\ExcelTemplate.cs" />
     <Compile Include="Utils\ImageHandler.cs" />
@@ -152,13 +153,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Pdf\Fonts\ARIALUNI.TTF" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pdf\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

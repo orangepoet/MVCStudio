@@ -20,6 +20,6 @@
     <menu name="水电" action="Index" controller="Charge"></menu>
   </menu>
   <menu name="功能展示">
-    <menu name="Pdf" action="Index" controller="PdfSample"></menu>
+    <menu name="Pdf" action="Index" controller="Pdf"></menu>
   </menu>
 </root>
