@@ -19,7 +19,7 @@ namespace Mvc.Web.Controllers {
         }
 
         public ActionResult PdfHtml() {
-            return new PdfViewResult("Html", null, "Table");
+            return new PdfViewResult("Html", null, DateTime.Now.ToShortTimeString());
         }
     }
 }

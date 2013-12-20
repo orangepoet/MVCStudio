@@ -8,11 +8,18 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Html</title>
+    <style>
+        p
+        {
+            font-size: 12px;
+            color: #808080;
+        }
+    </style>
 </head>
-<body>
+<body style="font-family: Arial Unicode MS">
     <div>
-        <h3 style="text-align: center; color: yellow;">有你的快乐</h3>
-        <h3 style="text-align: center; color: orange">迷宫</h3>
+        <p>有你的快乐</p>
+        <p>迷宫</p>
         <table style="width: 100%">
             <tr>
                 <td>1</td>
@@ -26,6 +33,6 @@
             </tr>
         </table>
     </div>
-    <a class="Print" href="@Url.Action("PdfHtml")">打印</a>
+    <a class="pdfexport" href="@Url.Action("PdfHtml")">打印</a>
 </body>
 </html>

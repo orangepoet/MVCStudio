@@ -14,10 +14,21 @@ namespace Mvc.Web.Controllers {
 
         [Inject]
         public ICustomerMgr bl { get; set; }
+
         //BL_Customer bl = new BL_Customer();
 
         //[AutoRefresh(DurationInSeconds = 10)]
-        //[OutputCache(CacheProfile = "customercache")]
+        //[OutputCache(CacheProfile = "customercache")] 
+
+        public PartialViewResult PopUp(int pageIndex = 1) {
+            return PartialView(new PagedList<Customer>(
+                                           bl.GetCustomers().Where(c => c.Status != "D"),
+                                           pageIndex,
+                                           10));
+        }
+
+        #region Basic CRUD
+
         public ViewResult Index() {
             //System.Diagnostics.Debug.WriteLine(pageIndex);
             //var model = service.All.Where(c => c.Status != "D").OrderByDescending(c => c.CustomerId).ToPagedList(pageIndex, pageSize);
@@ -52,13 +63,6 @@ namespace Mvc.Web.Controllers {
                        .ToPagedList(pageIndex, pageSize);
             System.Diagnostics.Debug.WriteLine("Grid:" + pageIndex.ToString());
             return PartialView(model);
-        }
-
-        public PartialViewResult PopUp(int pageIndex = 1) {
-            return PartialView(new PagedList<Customer>(
-                                           bl.GetCustomers().Where(c => c.Status != "D"),
-                                           pageIndex,
-                                           10));
         }
 
         public ViewResult Details(int id) {
@@ -130,12 +134,6 @@ namespace Mvc.Web.Controllers {
             ExcelHelper.Write(new System.Data.DataTable(), ExcelTemplate.TEMPLATE1);
             return View();
         }
-
-        //protected override void Dispose(bool disposing) {
-        //    if (disposing) {
-        //        service.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
+        #endregion
     }
 }

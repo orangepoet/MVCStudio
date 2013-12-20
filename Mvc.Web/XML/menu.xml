@@ -1,25 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <root>
-  <menu name="客户管理">
-    <menu name="客户信息" action="Index" controller="Customer"></menu>
-    <menu name="客户分组" action="Index" controller="Group"></menu>
-  </menu>
-  <menu name="信息管理">
-    <menu name="个人信息" action="Index" controller="Person"></menu>
-    <menu name="工种管理" action="Index" controller="Job"></menu>
-    <menu name="场地人员" action="Index" controller="Charge"></menu>
-    <menu name="货位管理" action="Index" controller="Charge"></menu>
-    <menu name="货品管理" action="Index" controller="Charge"></menu>
-    <menu name="仓库管理" action="Index" controller="Charge"></menu>
-  </menu>
-  <menu name="系统管理">
-    <menu name="模块管理" action="Module" controller="System"></menu>
-  </menu>
-  <menu name="测试部分">
-    <menu name="测试" action="Index" controller="Test"></menu>
-    <menu name="水电" action="Index" controller="Charge"></menu>
-  </menu>
-  <menu name="功能展示">
-    <menu name="Pdf" action="Index" controller="Pdf"></menu>
-  </menu>
+    <menu name="MVC特性">
+        <menu name="首页" action="Index" controller="Home"></menu>
+        <menu name="AsyncDemo" action="Index" controller="AsyncDemo"></menu>
+        <menu name="AjaxHelper" action="Index" controller="AjaxDemo"></menu>
+    </menu>
+    <menu name="功能展示">
+        <menu name="客户列表" action="Index" controller="Customer"></menu>
+        <menu name="Pdf报表" action="Index" controller="Pdf"></menu>
+    </menu>
 </root>

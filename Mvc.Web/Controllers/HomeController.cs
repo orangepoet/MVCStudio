@@ -14,19 +14,16 @@ using Mvc.Web.Models;
 using Ninject;
 
 namespace Mvc.Web.Controllers {
-    public class HomeController : AsyncController {
-        //
-        // GET: /Home/
+    public class HomeController : Controller {
+
         [Inject]
         public ICustomerRepository custRep { get; set; }
 
         [Inject]
         public IGroupRepository groupRep { get; set; }
 
-
         public ActionResult Index(string id) {
             return View("Index", (object)id);
-            //string errMsg = res.ResourceManager.GetString("ErrMsg");
         }
 
         private void GetMenuFromXML(DoWorkEventArgs e) {
@@ -37,22 +34,6 @@ namespace Mvc.Web.Controllers {
             var model = GetMenuFromXML();
             return PartialView("_menu", model);
         }
-
-        #region Async Actions
-
-        public void DataAsync() {
-            AsyncManager.OutstandingOperations.Increment();
-            Task.Factory.StartNew(() => {
-                AsyncManager.Parameters["Data"] = "DataAsync";
-                AsyncManager.OutstandingOperations.Decrement();
-            });
-        }
-
-        public ActionResult DataCompleted(string Data) {
-            return Content(Data);
-        }
-
-        #endregion Async Actions
 
         private IList<MenuItem> GetMenuFromXML() {
             //var list = service.GetList(null);
@@ -106,36 +87,6 @@ namespace Mvc.Web.Controllers {
                 url = string.Format("{0}/{1}/{2}", root, lang, referrerPath.Trim('/'));
             }
             return this.Redirect(url);
-        }
-
-        public ActionResult AppointmentData(string id) {
-            IEnumerable<Appointment> data = new[] {
-                new Appointment { ClientName = "Joe", Date = DateTime.Parse("1/1/2012")},
-                new Appointment { ClientName = "Joe", Date = DateTime.Parse("2/1/2012")},
-                new Appointment { ClientName = "Joe", Date = DateTime.Parse("3/1/2012")},
-                new Appointment { ClientName = "Jane", Date = DateTime.Parse("1/20/2012")},
-                new Appointment { ClientName = "Jane", Date = DateTime.Parse("1/22/2012")},
-                new Appointment {ClientName = "Bob", Date = DateTime.Parse("2/25/2012")},
-            };
-            if (!string.IsNullOrEmpty(id) && id != "All") {
-                data = data.Where(e => e.ClientName == id);
-            }
-            return PartialView(data);
-        }
-
-        public JsonResult Book() {
-            return Json(new { Msg = "Success" }, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public JavaScriptResult Book(FormCollection forms) {
-            //return Json(new { Msg = "Success" }, "text/html",JsonRequestBehavior.DenyGet);
-            return JavaScript("alert('ss')");
-        }
-
-        public class Appointment {
-            public string ClientName { get; set; }
-            public DateTime Date { get; set; }
         }
 
         // 测试UnitOfWork

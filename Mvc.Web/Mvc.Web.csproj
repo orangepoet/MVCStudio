@@ -136,6 +136,8 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\SysUserController.cs" />
     <Compile Include="Areas\Visitor\VisitorAreaRegistration.cs" />
+    <Compile Include="Controllers\AjaxDemoController.cs" />
+    <Compile Include="Controllers\AsyncDemoController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PdfController.cs" />
@@ -143,6 +145,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\DropDownList.cs" />
     <Compile Include="Models\GridView.cs" />
     <Compile Include="Models\MenuItem.cs" />
@@ -161,7 +164,6 @@
     <Content Include="Content\images\css-menu-t3.jpg" />
     <Content Include="Content\images\hd6.png" />
     <Content Include="Content\images\hd7.png" />
-    <Content Include="Content\menu.css" />
     <Content Include="Content\images\calendar.gif" />
     <Content Include="Content\images\header.png" />
     <Content Include="Content\images\icon-back.gif" />
@@ -185,7 +187,6 @@
     <Content Include="Content\images\select.gif" />
     <Content Include="Content\images\struts.jpg" />
     <Content Include="Content\logistics.css" />
-    <Content Include="Content\nav.css" />
     <Content Include="Content\right.gif" />
     <Content Include="Content\sample.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -242,6 +243,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\vermenu.css" />
     <Content Include="DevTrends.MvcDonutCaching.README.txt" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -375,7 +377,7 @@
     <Content Include="Areas\Visitor\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\AppointmentData.cshtml" />
+    <Content Include="Views\AjaxDemo\AppointmentData.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -392,6 +394,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Pdf\Html.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AjaxDemo\_GracefulAjax.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AjaxDemo\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AsyncDemo\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

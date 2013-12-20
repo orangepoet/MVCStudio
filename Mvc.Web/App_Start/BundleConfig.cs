@@ -31,7 +31,8 @@ namespace Mvc.Web {
             /*Styles
              -------------------------------------*/
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                        "~/Content/site.css"));
+                        "~/Content/site.css",
+                        "~/Content/vermenu.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

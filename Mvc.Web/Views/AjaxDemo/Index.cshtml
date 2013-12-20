@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Index";
+    AjaxOptions ajaxOpts = new AjaxOptions {
+        UpdateTargetId = "tabledata",
+        Url = Url.Action("AppointmentData"),
+        LoadingElementId = "loading"
+    }; 
+}
+<style>
+    .hidfileupload
+    {
+        opacity: 0;
+    }
+</style>
+
+<h2>Index</h2>
+<section>
+    @{Html.RenderPartial("_GracefulAjax");}
+</section>
+<section>
+    <h2></h2>
+    @using (Ajax.BeginForm(ajaxOpts)) { 
+        <table>
+            <thead>
+                <tr>
+                    <th>Client Name
+                    </th>
+                    <th>Appointment Dates
+                    </th>
+                    @Ajax.ActionLink("Test", "Book", new AjaxOptions { OnSuccess = "OnSuccess" })
+                    @using (Ajax.BeginForm("Book", new AjaxOptions { OnSuccess = "OnSuccess" })) {
+                        <input type="submit" name="submit" value="submit" />
+                    }
+                    <form action="@Url.Action("Upload")" method="post" enctype="multipart/form-data">
+                        <a id="aupload" href="#">Click Me</a>
+                        <input type="button" id="btnsubmit" name="btnsubmit" value="submit" />
+                        <input class="hidfileupload" type="file" name="file" id="file" value="browse" />
+                    </form>
+
+
+                </tr>
+            </thead>
+            <tbody id="tabledata">
+                @Html.Action("AppointmentData", new { id = Model })
+            </tbody>
+        </table> 
+        <p>
+            @Html.DropDownList("id", new SelectList(
+new[] { "All", "Joe", "Jane", "Bob" }, (Model ?? "All")))
+            <input type="submit" value="Submit" />
+        </p> 
+    }
+</section>
+@section scripts{
+    <script src="@Url.Content("~/Scripts/jquery.form.js")"></script>
+    <script type="text/javascript">
+        function OnSuccess(data) {
+            if (data != undefined) {
+                alert(data.Msg);
+            }
+        }
+        $(function () {
+            $("#btnsubmit").click(function () {
+                $form = $(this).closest("form");
+                $form.ajaxSubmit(function (data) {
+                    alert(data);
+                });
+            });
+            $("#aupload").click(function () {
+                $(".hidfileupload").trigger("click");
+            });
+        })
+    </script>
+}

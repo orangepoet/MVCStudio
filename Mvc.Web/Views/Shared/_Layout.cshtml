@@ -8,31 +8,23 @@
     @*@Scripts.Render(" /bundles/modernizr")*@
     <link href="@Url.Content("~/Content/menu.css")" rel="stylesheet" type="text/css" />
     @*@Scripts.Render("~/bundles/modernizr")*@
-    <style type="text/css">
-        #nav
-        {
-            float: left;
-            width: 150px;
-        }
-        #main
-        {
-            margin-left: 160px;
-            border-left: 1px solid black;
-            padding-left: 10px;
-        }
-    </style>
 </head>
 <body>
     <div id="header">
-    <div id="nav">
-        @*@Html.Partial("_navdemo")*@
-        @{Html.RenderAction("Menu", "Home");}
-    </div>
-    <div id="main">
-        @RenderBody()
-    </div>
-    <div id="footer">
-    </div>
+        <div id="nav" class="nav">
+            @*@Html.Partial("_navdemo")*@
+            @{Html.RenderAction("Menu", "Home");}
+        </div>
+        <div id="main">
+            @RenderBody()
+        </div>
+        <div id="footer">
+        </div>
+        <div id="loading" style="display: none; color: Red; font-weight: bold">
+            <p>
+                Loading Data...
+            </p>
+        </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)

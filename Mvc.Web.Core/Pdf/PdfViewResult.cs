@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using iTextSharp.text;
 using iTextSharp.text.html.simpleparser;
 using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
 
 namespace Mvc.Web.Core.Pdf {
     public class PdfViewResult : ActionResult {
@@ -37,12 +38,7 @@ namespace Mvc.Web.Core.Pdf {
                 using (PdfWriter pdfWriter = PdfWriter.GetInstance(document, response.OutputStream)) {
                     pdfWriter.CloseStream = false;
 
-                    // set enable for chinese.
-                    FontFactory.Register(context.HttpContext.Server.MapPath("~/Content/fonts/ARIALUNI.TTF"));
-                    StyleSheet style = new StyleSheet();
-                    style.LoadTagStyle("body", "face", "Arial Unicode MS");
-                    style.LoadTagStyle("body", "encoding", BaseFont.IDENTITY_H);
-                    //
+
                     ViewEngineResult viewEngineResult = ViewEngines.Engines.FindView(context, _viewName, null);
                     if (viewEngineResult == null) {
                         throw new FileNotFoundException("View cannot be found!");
@@ -52,22 +48,17 @@ namespace Mvc.Web.Core.Pdf {
 
                     StringBuilder sb = new StringBuilder();
                     using (TextWriter tw = new StringWriter(sb)) {
-                        var ctx = new ViewContext(context, view,
-                                                  context.Controller.ViewData,
-                                                  context.Controller.TempData,
-                                                  tw);
+                        var ctx = new ViewContext(context, view, context.Controller.ViewData, context.Controller.TempData, tw);
                         view.Render(ctx, tw);
                     }
 
                     string html = sb.ToString();
-                    string pattern = "<a class=\"Print\"\\s+href=\"[~/\\w]+\">打印</a>";
+                    string pattern = "<a class=\"pdfexport\"\\s+href=\"[~/\\w]+\">\\w+</a>";
                     string s = Regex.Replace(html, pattern, "");
                     using (TextReader tr = new StringReader(s)) {
                         document.Open();
-                        var parsedElementList = HTMLWorker.ParseToList(tr, style);
-                        foreach (var element in parsedElementList) {
-                            document.Add(element);
-                        }
+                        FontFactory.Register(context.HttpContext.Server.MapPath("~/Content/fonts/ARIALUNI.TTF"), "Arial Unicode MS");
+                        XMLWorkerHelper.GetInstance().ParseXHtml(pdfWriter, document, tr);
                         document.Close();
                     }
                 }
