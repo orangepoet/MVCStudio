@@ -140,6 +140,7 @@
     <Compile Include="Controllers\AsyncDemoController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PdfController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -247,6 +248,7 @@
     <Content Include="DevTrends.MvcDonutCaching.README.txt" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Knockout.html" />
     <Content Include="Pdf.html" />
     <Content Include="Scripts\jquery.form.js" />
     <Content Include="Scripts\logistics.js" />

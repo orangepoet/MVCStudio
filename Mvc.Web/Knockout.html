@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>knockout Examples</title>
+
+</head>
+<body>
+    <h1>knockout Examples</h1>
+    <div>
+        <h2>input sync with span</h2>
+        <div>
+            <p>
+                Input your firstName:  
+                <input type="text" data-bind="value: firstname" /><br />
+                Input your secondName:
+                <input type="text" data-bind="value: secondname" />
+            </p>
+            <p>
+                First Name: <span data-bind="text: firstname"></span>
+                <br />
+                Second Name: <span data-bind="text: secondname"></span>
+            </p>
+        </div>
+    </div>
+    <script src="/Scripts/knockout-2.1.0.js"></script>
+    <script>
+        var viewModel = {
+            firstname: ko.observable(),
+            secondname: ko.observable()
+        };
+
+        ko.applyBindings(viewModel);
+    </script>
+</body>
+</html>
