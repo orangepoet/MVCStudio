@@ -138,6 +138,7 @@
     <Compile Include="Areas\Visitor\VisitorAreaRegistration.cs" />
     <Compile Include="Controllers\AjaxDemoController.cs" />
     <Compile Include="Controllers\AsyncDemoController.cs" />
+    <Compile Include="Controllers\BaiduMapController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
@@ -244,7 +245,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
-    <Content Include="Content\vermenu.css" />
+    <Content Include="Content\menu.css" />
     <Content Include="DevTrends.MvcDonutCaching.README.txt" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -405,6 +406,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\AsyncDemo\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\BaiduMap\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\BaiduMap\_ViewStart.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

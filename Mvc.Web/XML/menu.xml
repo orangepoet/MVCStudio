@@ -1,12 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <root>
-    <menu name="MVC特性">
-        <menu name="首页" action="Index" controller="Home"></menu>
-        <menu name="AsyncDemo" action="Index" controller="AsyncDemo"></menu>
-        <menu name="AjaxHelper" action="Index" controller="AjaxDemo"></menu>
-    </menu>
-    <menu name="功能展示">
-        <menu name="客户列表" action="Index" controller="Customer"></menu>
-        <menu name="Pdf报表" action="Index" controller="Pdf"></menu>
-    </menu>
+  <menu name="MVC特性">
+    <menu name="首页" action="Index" controller="Home"></menu>
+    <menu name="AsyncDemo" action="Index" controller="AsyncDemo"></menu>
+    <menu name="AjaxHelper" action="Index" controller="AjaxDemo"></menu>
+  </menu>
+  <menu name="功能展示">
+    <menu name="客户列表" action="Index" controller="Customer"></menu>
+    <menu name="Pdf报表" action="Index" controller="Pdf"></menu>
+  </menu>
+  <menu name="百度地图">
+    <menu name="云麻点图" action="Index" controller="BaiduMap"></menu>
+  </menu>
 </root>
